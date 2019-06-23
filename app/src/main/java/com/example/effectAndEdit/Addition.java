@@ -1,4 +1,4 @@
-package com.example.effectandedit;
+package com.example.effectAndEdit;
 
-public class Addition {
+class Addition {
 }

@@ -1,4 +1,4 @@
-package com.example.effectandedit
+package com.example.effectAndEdit
 
 
 import android.annotation.SuppressLint
@@ -52,7 +52,7 @@ class SavePage : AppCompatActivity() {
             stream.close()
 
             Toast.makeText(this, "Final Image Saved! Directory: $currentPhotoPath.", Toast.LENGTH_LONG).show()
-            val firstIntent = Intent(this, MainActivity::class.java)
+            val firstIntent = Intent(this, FirstPage::class.java)
             startActivity(firstIntent)
         } catch (e: IOException) {
             Toast.makeText(this, "A problem occurred.", Toast.LENGTH_SHORT).show()

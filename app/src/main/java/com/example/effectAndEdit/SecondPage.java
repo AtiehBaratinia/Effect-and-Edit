@@ -1,4 +1,4 @@
-package com.example.effectandedit;
+package com.example.effectAndEdit;
 
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
@@ -8,8 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import com.example.effectandedit.MainActivity;
-import com.example.effectandedit.R;
 
 public class SecondPage extends AppCompatActivity {
     static Bitmap image;
@@ -20,7 +18,7 @@ public class SecondPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        image = MainActivity.Companion.getImageFile();
+        image = FirstPage.Companion.getImageFile();
 
         imageView = findViewById(R.id.image_view_sec);
         Button resizeButton = findViewById(R.id.resize_button);
