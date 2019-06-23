@@ -1,4 +1,4 @@
-package com.example.effectandedit
+package com.example.effectAndEdit
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -16,13 +16,12 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
-import com.example.effectandedit.R
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class FirstPage : AppCompatActivity() {
 
     private var takePhotoButton: Button? = null
     private var selectedImage: ImageView? = null
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_first)
 
         takePhotoButton = findViewById<View>(R.id.button_take_photo) as Button
         selectedImage = findViewById<View>(R.id.image_view) as ImageView
