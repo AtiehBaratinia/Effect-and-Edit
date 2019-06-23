@@ -1,4 +1,4 @@
-package com.example.effectAndEdit
+package com.example.effectandedit
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.example.effectAndEdit", appContext.packageName)
+        assertEquals("com.example.effectandedit", appContext.packageName)
     }
 }

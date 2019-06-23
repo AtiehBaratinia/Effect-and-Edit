@@ -1,4 +1,4 @@
-package com.example.effectAndEdit;
+package com.example.effectandedit;
 
 public class Frame extends Addition {
 }

@@ -1,4 +1,4 @@
-package com.example.effectAndEdit;
+package com.example.effectandedit;
 
 import android.graphics.Bitmap;
 
