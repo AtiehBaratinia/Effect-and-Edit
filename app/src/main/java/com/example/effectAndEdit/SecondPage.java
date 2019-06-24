@@ -39,13 +39,31 @@ class SecondPage extends AppCompatActivity implements View.OnClickListener {
         additionButton.setOnClickListener(this);
     }
 
+    public void resize() {
+        System.out.println("Resize Clicked.");
+    }
 
+    public void crop() {
+        System.out.println("Crop Clicked.");
+    }
+
+    public void grid() {
+        System.out.println("Grid Clicked.");
+    }
+
+    public void blur() {
+        System.out.println("Blur Clicked.");
+    }
+
+    public void paint() {
+        System.out.println("Paint Clicked.");
+    }
 
     public void chooseEffect() {
         System.out.println("Effect Clicked.");
         AlertDialog.Builder effectsDialog = new AlertDialog.Builder(this);
         effectsDialog.setTitle("Choose an Effect");
-        String[] effectsDialogItems = {"سیاه و سفید کردن تصویر", "Effect 2", "Effect 3"};
+        String[] effectsDialogItems = {"سیاه و سفید", "Effect 2", "Effect 3"};
         effectsDialog.setItems(effectsDialogItems, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -97,25 +115,25 @@ class SecondPage extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.resize_button:
-                System.out.println("Resize Clicked.");
-                break;
-            case R.id.addition_button:
-                chooseAddition();
-                break;
-            case R.id.blur_button:
-                System.out.println("Blur Clicked.");
+                resize();
                 break;
             case R.id.crop_button:
-                System.out.println("Crop Clicked.");
+                crop();
+                break;
+            case R.id.grid_button:
+                grid();
+                break;
+            case R.id.blur_button:
+                blur();
+                break;
+            case R.id.paint_button:
+                paint();
                 break;
             case R.id.effect_button:
                 chooseEffect();
                 break;
-            case R.id.grid_button:
-                System.out.println("Grid Clicked.");
-                break;
-            case R.id.paint_button:
-                System.out.println("Paint Clicked.");
+            case R.id.addition_button:
+                chooseAddition();
                 break;
 
         }
