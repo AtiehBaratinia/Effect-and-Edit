@@ -34,6 +34,9 @@ class SavePage : AppCompatActivity() {
         saveButton!!.setOnClickListener { save(image!!) }
     }
 
+    /**
+     * To save the final image in the specific directory and show it to the user.
+     */
     @SuppressLint("SimpleDateFormat")
     private fun save(bitmap: Bitmap) {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())

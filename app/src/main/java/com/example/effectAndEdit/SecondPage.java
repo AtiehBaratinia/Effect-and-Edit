@@ -39,26 +39,44 @@ class SecondPage extends AppCompatActivity implements View.OnClickListener {
         additionButton.setOnClickListener(this);
     }
 
+    /**
+     * To do resizing on image.
+     */
     public void resize() {
         System.out.println("Resize Clicked.");
     }
 
+    /**
+     * To do cropping on image.
+     */
     public void crop() {
         System.out.println("Crop Clicked.");
     }
 
+    /**
+     * To do griding on image.
+     */
     public void grid() {
         System.out.println("Grid Clicked.");
     }
 
+    /**
+     * To do blurring on image.
+     */
     public void blur() {
         System.out.println("Blur Clicked.");
     }
 
+    /**
+     * to do painting on image.
+     */
     public void paint() {
         System.out.println("Paint Clicked.");
     }
 
+    /**
+     * To choose and apply effects.
+     */
     public void chooseEffect() {
         System.out.println("Effect Clicked.");
         AlertDialog.Builder effectsDialog = new AlertDialog.Builder(this);
@@ -69,7 +87,7 @@ class SecondPage extends AppCompatActivity implements View.OnClickListener {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:
-                        Bitmap bitmap = Effects.doGreyscale(image);
+                        Bitmap bitmap = Effects.doGreyScale(image);
                         imageView.setImageBitmap(bitmap);
                         break;
                     case 1:
@@ -84,6 +102,9 @@ class SecondPage extends AppCompatActivity implements View.OnClickListener {
         effectsDialog.show();
     }
 
+    /**
+     * To choose the addition and apply it.
+     */
     public void chooseAddition() {
         System.out.println("Addition Clicked.");
         AlertDialog.Builder additionsDialog = new AlertDialog.Builder(this);
@@ -135,7 +156,6 @@ class SecondPage extends AppCompatActivity implements View.OnClickListener {
             case R.id.addition_button:
                 chooseAddition();
                 break;
-
         }
     }
 }

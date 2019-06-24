@@ -2,10 +2,17 @@ package com.example.effectAndEdit;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import org.jetbrains.annotations.NotNull;
 
 class Effects {
 
-    static Bitmap doGreyscale(Bitmap src) {
+    /**
+     * To make the image gray scale.
+     *
+     * @param src the image we want to make changes.
+     * @return the processed image.
+     */
+    static Bitmap doGreyScale(@NotNull Bitmap src) {
         // constant factors
         final double GS_RED = 0.299;
         final double GS_GREEN = 0.587;
@@ -42,11 +49,11 @@ class Effects {
         return bmOut;
     }
 
-    static void effect2(Bitmap image) {
+    static void effect2(@NotNull Bitmap image) {
         System.out.println("Effect 2 Applied.");
     }
 
-    static void effect3(Bitmap image) {
+    static void effect3(@NotNull Bitmap image) {
         System.out.println("Effect 3 Applied.");
     }
 }
