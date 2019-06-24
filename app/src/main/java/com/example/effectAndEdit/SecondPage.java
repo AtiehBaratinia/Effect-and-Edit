@@ -116,22 +116,26 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
         additionsDialog.setItems(additionsDialogItems, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(additionsDialog.getContext(), Addition.class);
                 switch (which) {
                     case 0:
                         //Here a sticker applies. From Addition class.
                         System.out.println("Sticker Clicked.");
+                        intent.putExtra("type","sticker");
                         break;
                     case 1:
                         //Here a text applies. From Text class.
                         System.out.println("Text Clicked.");
-                        Intent intent = new Intent(additionsDialog.getContext(), Addition.class);
-                        
+                        intent.putExtra("type","text");
+
                         break;
                     case 2:
                         //Here a frame applies. From Frame class.
                         System.out.println("Frame Clicked.");
+                        intent.putExtra("type","frame");
                         break;
                 }
+                startActivity(intent);
             }
         });
         additionsDialog.show();
