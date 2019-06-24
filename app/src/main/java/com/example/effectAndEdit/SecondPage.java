@@ -1,6 +1,7 @@
 package com.example.effectAndEdit;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -107,7 +108,7 @@ class SecondPage extends AppCompatActivity implements View.OnClickListener {
      */
     public void chooseAddition() {
         System.out.println("Addition Clicked.");
-        AlertDialog.Builder additionsDialog = new AlertDialog.Builder(this);
+        final AlertDialog.Builder additionsDialog = new AlertDialog.Builder(this);
         additionsDialog.setTitle("Choose an Addition");
         String[] additionsDialogItems = {"Sticker", "Text", "Frame"};
         additionsDialog.setItems(additionsDialogItems, new DialogInterface.OnClickListener() {
@@ -121,6 +122,8 @@ class SecondPage extends AppCompatActivity implements View.OnClickListener {
                     case 1:
                         //Here a text applies. From Text class.
                         System.out.println("Text Clicked.");
+                        Intent intent = new Intent(additionsDialog.getContext(), Addition.class);
+                        
                         break;
                     case 2:
                         //Here a frame applies. From Frame class.
