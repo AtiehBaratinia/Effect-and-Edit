@@ -1,6 +1,7 @@
 package com.example.effectAndEdit;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -28,6 +29,7 @@ class SecondPage extends AppCompatActivity implements View.OnClickListener {
         Button paintButton = findViewById(R.id.paint_button);
         Button effectButton = findViewById(R.id.effect_button);
         Button additionButton = findViewById(R.id.addition_button);
+        Button saveButton = findViewById(R.id.save_button);
         imageView.setImageBitmap(image);
 
         resizeButton.setOnClickListener(this);
@@ -37,6 +39,7 @@ class SecondPage extends AppCompatActivity implements View.OnClickListener {
         paintButton.setOnClickListener(this);
         effectButton.setOnClickListener(this);
         additionButton.setOnClickListener(this);
+        saveButton.setOnClickListener(this);
     }
 
     /**
@@ -87,8 +90,8 @@ class SecondPage extends AppCompatActivity implements View.OnClickListener {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:
-                        Bitmap bitmap = Effects.doGreyScale(image);
-                        imageView.setImageBitmap(bitmap);
+                        image = Effects.doGreyScale(image);
+                        imageView.setImageBitmap(image);
                         break;
                     case 1:
                         Effects.effect2(image);
@@ -132,6 +135,14 @@ class SecondPage extends AppCompatActivity implements View.OnClickListener {
         additionsDialog.show();
     }
 
+    /**
+     * To go to the save page. Starts the activity of SavePage.
+     */
+    public void goToSavePage() {
+        Intent saveIntent = new Intent(this, SavePage.class);
+        startActivity(saveIntent);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -155,6 +166,9 @@ class SecondPage extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.addition_button:
                 chooseAddition();
+                break;
+            case R.id.save_button:
+                goToSavePage();
                 break;
         }
     }

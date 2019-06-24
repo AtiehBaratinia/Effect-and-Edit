@@ -54,6 +54,9 @@ class SavePage : AppCompatActivity() {
             stream.flush()
             stream.close()
 
+            FirstPage.imageFile = null
+            SecondPage.image = null
+
             Toast.makeText(this, "Final Image Saved! Directory: $currentPhotoPath.", Toast.LENGTH_LONG).show()
             val firstIntent = Intent(this, FirstPage::class.java)
             startActivity(firstIntent)
