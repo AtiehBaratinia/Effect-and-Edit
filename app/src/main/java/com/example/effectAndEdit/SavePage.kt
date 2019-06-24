@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import com.example.effectAndEdit.R
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException

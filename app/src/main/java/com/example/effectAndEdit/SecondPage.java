@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class SecondPage extends AppCompatActivity {
+public class SecondPage extends AppCompatActivity implements View.OnClickListener {
     static Bitmap image;
     private ImageView imageView;
 
@@ -30,69 +30,16 @@ public class SecondPage extends AppCompatActivity {
         Button additionButton = findViewById(R.id.addition_button);
         imageView.setImageBitmap(image);
 
-        resizeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resize();
-            }
-        });
-        cropButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                crop();
-            }
-        });
-        gridButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                grid();
-            }
-        });
-        blurButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                blur();
-            }
-        });
-        paintButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                paint();
-            }
-        });
-        effectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseEffect();
-            }
-        });
-        additionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseAddition();
-            }
-        });
+        resizeButton.setOnClickListener(this);
+        cropButton.setOnClickListener(this);
+        gridButton.setOnClickListener(this);
+        blurButton.setOnClickListener(this);
+        paintButton.setOnClickListener(this);
+        effectButton.setOnClickListener(this);
+        additionButton.setOnClickListener(this);
     }
 
-    public void resize() {
-        System.out.println("Resize Clicked.");
-    }
 
-    public void crop() {
-        System.out.println("Crop Clicked.");
-    }
-
-    public void grid() {
-        System.out.println("Grid Clicked.");
-    }
-
-    public void blur() {
-        System.out.println("Blur Clicked.");
-    }
-
-    public void paint() {
-        System.out.println("Paint Clicked.");
-    }
 
     public void chooseEffect() {
         System.out.println("Effect Clicked.");
@@ -143,5 +90,33 @@ public class SecondPage extends AppCompatActivity {
             }
         });
         additionsDialog.show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.resize_button:
+                System.out.println("Resize Clicked.");
+                break;
+            case R.id.addition_button:
+                chooseAddition();
+                break;
+            case R.id.blur_button:
+                System.out.println("Blur Clicked.");
+                break;
+            case R.id.crop_button:
+                System.out.println("Crop Clicked.");
+                break;
+            case R.id.effect_button:
+                chooseEffect();
+                break;
+            case R.id.grid_button:
+                System.out.println("Grid Clicked.");
+                break;
+            case R.id.paint_button:
+                System.out.println("Paint Clicked.");
+                break;
+
+        }
     }
 }
