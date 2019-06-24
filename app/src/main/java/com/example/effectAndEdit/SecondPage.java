@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-class SecondPage extends AppCompatActivity implements View.OnClickListener {
+public class SecondPage extends AppCompatActivity implements View.OnClickListener {
     static Bitmap image;
     private ImageView imageView;
 
