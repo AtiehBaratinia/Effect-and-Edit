@@ -2,6 +2,7 @@ package com.example.effectAndEdit
 
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -35,10 +36,26 @@ class SavePage : AppCompatActivity() {
     }
 
     /**
-     * To save the final image in the specific directory and show it to the user.
+     * To save final image. This method asks user how he/she want to save the image.
+     */
+    private fun save(image: Bitmap) {
+        val saveDialog = AlertDialog.Builder(this)
+        saveDialog.setTitle("Select Kind of Saving")
+        val saveDialogItems = arrayOf("Normal Save", "Grid Save")
+        saveDialog.setItems(saveDialogItems) { _, which ->
+            when (which) {
+                0 -> normalSave(image)
+                1 -> gridSave(image)
+            }
+        }
+        saveDialog.show()
+    }
+
+    /**
+     * To save the final image in the specific directory normally and show it to the user.
      */
     @SuppressLint("SimpleDateFormat")
-    private fun save(bitmap: Bitmap) {
+    private fun normalSave(bitmap: Bitmap) {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir: File = getExternalFilesDir("../Final Pictures")!!
         val file = File.createTempFile(
@@ -62,6 +79,22 @@ class SavePage : AppCompatActivity() {
             startActivity(firstIntent)
         } catch (e: IOException) {
             Toast.makeText(this, "A problem occurred.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    /**
+     * To save the image in a 9*9 format.
+     */
+    private fun gridSave(bitmap: Bitmap) {
+        val width = bitmap.width
+        val height = bitmap.height
+        val side = if (width > height) height / 3 else width / 3
+
+        for (i in 0 until 3) {
+            for (j in 0 until 3) {
+                val buffBitmap = Bitmap.createBitmap(bitmap, j * side, i * side, side, side)
+                normalSave(buffBitmap)
+            }
         }
     }
 }

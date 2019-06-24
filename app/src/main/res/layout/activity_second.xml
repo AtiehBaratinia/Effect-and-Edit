@@ -37,17 +37,12 @@
                     android:text="@string/crop"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/crop_button"
-                    app:layout_constraintBottom_toTopOf="@+id/grid_button"/>
-            <Button
-                    android:text="@string/grid"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/grid_button"
-                    app:layout_constraintBottom_toTopOf="@+id/blur_button"/>
+                    app:layout_constraintBottom_toTopOf="@+id/blur_button" tools:layout_editor_absoluteX="20dp"/>
             <Button
                     android:text="@string/blur"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/blur_button"
-                    app:layout_constraintBottom_toTopOf="@+id/paint_button"/>
+                    app:layout_constraintBottom_toTopOf="@+id/paint_button" tools:layout_editor_absoluteX="20dp"/>
             <Button
                     android:text="@string/paint"
                     android:layout_width="match_parent"
