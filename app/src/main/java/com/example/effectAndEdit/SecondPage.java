@@ -45,13 +45,14 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
         System.out.println("Effect Clicked.");
         AlertDialog.Builder effectsDialog = new AlertDialog.Builder(this);
         effectsDialog.setTitle("Choose an Effect");
-        String[] effectsDialogItems = {"Effect 1", "Effect 2", "Effect 3"};
+        String[] effectsDialogItems = {"سیاه و سفید کردن تصویر", "Effect 2", "Effect 3"};
         effectsDialog.setItems(effectsDialogItems, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:
-                        Effects.effect1(image);
+                        Bitmap bitmap = Effects.doGreyscale(image);
+                        imageView.setImageBitmap(bitmap);
                         break;
                     case 1:
                         Effects.effect2(image);
