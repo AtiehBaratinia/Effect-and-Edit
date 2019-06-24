@@ -3,9 +3,9 @@ package com.example.effectAndEdit;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
-public class Effects {
+class Effects {
 
-    public static Bitmap doGreyscale(Bitmap src) {
+    static Bitmap doGreyscale(Bitmap src) {
         // constant factors
         final double GS_RED = 0.299;
         final double GS_GREEN = 0.587;
@@ -41,6 +41,7 @@ public class Effects {
         // return final image
         return bmOut;
     }
+
     static void effect2(Bitmap image) {
         System.out.println("Effect 2 Applied.");
     }

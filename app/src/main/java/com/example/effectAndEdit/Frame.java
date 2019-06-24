@@ -1,5 +1,5 @@
 package com.example.effectAndEdit;
 
-public class Frame extends Addition {
+class Frame extends Addition {
 }
 

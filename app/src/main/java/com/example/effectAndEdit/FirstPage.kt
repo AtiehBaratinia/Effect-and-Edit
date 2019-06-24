@@ -16,8 +16,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
-import com.example.effectAndEdit.R
-import java.io.*
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
