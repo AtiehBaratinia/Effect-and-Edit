@@ -1,11 +1,14 @@
 package com.example.effectAndEdit;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -62,17 +65,141 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
     }
 
     /**
-     * to do painting on image.
+     * To choose color and thickness of the pen to do painting.
      */
+    @SuppressLint("ClickableViewAccessibility")
     public void paint() {
-        System.out.println("Paint Clicked.");
+        final int[] color = new int[1];
+        final int[] thickness = new int[1];
+
+        // To choose color
+        AlertDialog.Builder colorDialog = new AlertDialog.Builder(this);
+        final AlertDialog.Builder thicknessDialog = new AlertDialog.Builder(this);
+        colorDialog.setTitle("Choose a Color");
+        String[] colorDialogItems = {"Blue", "Green", "Red", "Yellow", "White", "Black"};
+        colorDialog.setItems(colorDialogItems, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        color[0] = Color.BLUE;
+                        break;
+                    case 1:
+                        color[0] = Color.GREEN;
+                        break;
+                    case 2:
+                        color[0] = Color.RED;
+                        break;
+                    case 3:
+                        color[0] = Color.YELLOW;
+                        break;
+                    case 4:
+                        color[0] = Color.WHITE;
+                        break;
+                    case 5:
+                        color[0] = Color.BLACK;
+                        break;
+                }
+                thicknessDialog.show();
+            }
+        });
+
+        // To choose thickness
+        thicknessDialog.setTitle("Choose a Thickness");
+        String[] thicknessDialogItems = {"Thickness 1", "Thickness 2", "Thickness 3"};
+        thicknessDialog.setItems(thicknessDialogItems, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        thickness[0] = 1;
+                        break;
+                    case 1:
+                        thickness[0] = 5;
+                        break;
+                    case 2:
+                        thickness[0] = 10;
+                        break;
+                }
+            }
+        });
+        colorDialog.show();
+
+        // To paint
+        final int[] x = new int[1];
+        final int[] y = new int[1];
+        imageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                x[0] = (int) event.getX();
+                y[0] = (int) event.getY();
+
+                image = painting(x[0], y[0], thickness[0] * 5, color[0]);
+                imageView.setImageBitmap(image);
+                return false;
+            }
+        });
+    }
+
+    /**
+     * To paint on the image.
+     *
+     * @param x         x coordinate of where user touch.
+     * @param y         y coordinate of where user touch.
+     * @param thickness thickness of the pen.
+     * @param color     color of the pen.
+     * @return painted image.
+     */
+    private Bitmap painting(int x, int y, int thickness, int color) {
+        Bitmap out = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
+
+        for (int i = 0; i < image.getWidth(); ++i) {
+            for (int j = 0; j < image.getHeight(); ++j) {
+                // get one pixel color
+                int pixel = image.getPixel(i, j);
+                // retrieve color of all channels
+                int red = Color.red(pixel);
+                int green = Color.green(pixel);
+                int blue = Color.blue(pixel);
+
+                if (i <= x + thickness && j <= y + thickness && i >= x - thickness && j >= y - thickness) {
+                    switch (color) {
+                        case Color.BLUE:
+                            red = green = 0;
+                            blue = 255;
+                            break;
+                        case Color.GREEN:
+                            red = blue = 0;
+                            green = 255;
+                            break;
+                        case Color.RED:
+                            green = blue = 0;
+                            red = 255;
+                            break;
+                        case Color.YELLOW:
+                            red = green = 255;
+                            blue = 0;
+                            break;
+                        case Color.BLACK:
+                            red = blue = green = 0;
+                            break;
+                        case Color.WHITE:
+                            red = blue = green = 255;
+                            break;
+                    }
+                }
+
+                // set new pixel color to output bitmap
+                out.setPixel(i, j, Color.rgb(red, green, blue));
+            }
+        }
+        return out;
     }
 
     /**
      * To choose and apply effects.
      */
     public void chooseEffect() {
-        System.out.println("Effect Clicked.");
         AlertDialog.Builder effectsDialog = new AlertDialog.Builder(this);
         effectsDialog.setTitle("Choose an Effect");
         String[] effectsDialogItems = {"سیاه و سفید", "Effect 2", "Effect 3"};
@@ -100,7 +227,6 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
      * To choose the addition and apply it.
      */
     public void chooseAddition() {
-        System.out.println("Addition Clicked.");
         final AlertDialog.Builder additionsDialog = new AlertDialog.Builder(this);
         additionsDialog.setTitle("Choose an Addition");
         String[] additionsDialogItems = {"Sticker", "Text", "Frame"};
