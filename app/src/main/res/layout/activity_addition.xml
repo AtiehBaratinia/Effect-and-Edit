@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:id="@+id/root_layout"
+        android:padding="20dp"
         android:layout_height="match_parent"
         tools:context=".Addition">
 
@@ -15,14 +15,29 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
     />
-    <EditText
-            android:layout_height="wrap_content"
-            android:layout_width="100dp"
-            android:id="@+id/edittext"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:hint="type here"
-            android:textSize="20sp"
-            android:scrollHorizontally="false"
+    <!--<EditText-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:id="@+id/edittext"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:hint="type here"-->
+            <!--android:textSize="20sp"-->
+            <!--android:scrollHorizontally="false"-->
+    <!--/>-->
+    <RelativeLayout android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:padding="20dp"
+                    android:id="@+id/root_layout">
+    </RelativeLayout>
+    <Button
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"
+    android:text="خوبه!"
+    android:id="@+id/button_addition_next"
     />
 </RelativeLayout>
