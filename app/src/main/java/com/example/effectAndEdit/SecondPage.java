@@ -24,7 +24,6 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
         imageView = findViewById(R.id.image_view_sec);
         Button resizeButton = findViewById(R.id.resize_button);
         Button cropButton = findViewById(R.id.crop_button);
-        Button gridButton = findViewById(R.id.grid_button);
         Button blurButton = findViewById(R.id.blur_button);
         Button paintButton = findViewById(R.id.paint_button);
         Button effectButton = findViewById(R.id.effect_button);
@@ -34,7 +33,6 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
 
         resizeButton.setOnClickListener(this);
         cropButton.setOnClickListener(this);
-        gridButton.setOnClickListener(this);
         blurButton.setOnClickListener(this);
         paintButton.setOnClickListener(this);
         effectButton.setOnClickListener(this);
@@ -54,13 +52,6 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
      */
     public void crop() {
         System.out.println("Crop Clicked.");
-    }
-
-    /**
-     * To do griding on image.
-     */
-    public void grid() {
-        System.out.println("Grid Clicked.");
     }
 
     /**
@@ -157,9 +148,6 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.crop_button:
                 crop();
-                break;
-            case R.id.grid_button:
-                grid();
                 break;
             case R.id.blur_button:
                 blur();
