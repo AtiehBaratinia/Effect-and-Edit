@@ -1,6 +1,7 @@
 package com.example.effectAndEdit;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,12 +17,13 @@ import android.widget.ImageView;
 public class SecondPage extends AppCompatActivity implements View.OnClickListener {
     static Bitmap image;
     private ImageView imageView;
+    public static Activity fa;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-
+        fa = this;
         image = FirstPage.Companion.getImageFile();
 
         imageView = findViewById(R.id.image_view_sec);

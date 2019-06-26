@@ -13,8 +13,8 @@
             android:layout_height="wrap_content"
             tools:srcCompat="@tools:sample/avatars"
             android:id="@+id/image_addition"
-            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
     />
     <!--<EditText-->
             <!--android:layout_height="wrap_content"-->

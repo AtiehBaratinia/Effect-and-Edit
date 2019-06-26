@@ -2,13 +2,13 @@ package com.example.effectAndEdit;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.DragEvent;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,9 +18,11 @@ public class Addition extends AppCompatActivity implements View.OnClickListener,
     static Bitmap image;
     String type;
     ImageView imageView, sticker;
+    Bitmap bitmapSticker;
     EditText editText;
     ViewGroup viewGroup;
     Button btn;
+    float stickerX, stickerY;
     AlertDialog dialog;
     private int xDelta;
     private int yDelta;
@@ -64,7 +66,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener,
         imageViews[8] = view.findViewById(R.id.image9);
         imageViews[9] = view.findViewById(R.id.image10);
         imageViews[10] = view.findViewById(R.id.image11);
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 11; i++) {
             imageViews[i].setOnClickListener(new StickerTouch());
         }
 
@@ -74,7 +76,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener,
 
         viewGroup = (ViewGroup)findViewById(R.id.top_layout);
         sticker = new ImageView(this);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150,150);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(240,240);
 
         sticker.setLayoutParams(layoutParams);
         sticker.setOnTouchListener(new ChoiceTouchListener());
@@ -106,49 +108,61 @@ public class Addition extends AppCompatActivity implements View.OnClickListener,
 
         @Override
         public void onClick(View v) {
+
             switch (v.getId()){
                 case R.id.image1:
-                    sticker.setImageResource(R.drawable.smiling_face_with_heart_shaped_eyes_1f60d);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.smiling_face_with_heart_shaped_eyes_1f60d);
+                    sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image2:
-                    sticker.setImageResource(R.drawable.multiple_musical_notes_1f3b6);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.multiple_musical_notes_1f3b6);
+                    sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image3:
-                    sticker.setImageResource(R.drawable.male_technologist_type_1_2_1f468_1f3fb_200d_1f4bb);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.male_technologist_type_1_2_1f468_1f3fb_200d_1f4bb);
+                    sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image4:
-                    sticker.setImageResource(R.drawable.person_raising_both_hands_in_celebration_emoji_modifier_fitzpatrick_type_1_2_1f64c_1f3fb_1f3fb);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.person_raising_both_hands_in_celebration_emoji_modifier_fitzpatrick_type_1_2_1f64c_1f3fb_1f3fb);
+                    sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image5:
-                    sticker.setImageResource(R.drawable.person_with_folded_hands_emoji_modifier_fitzpatrick_type_1_2_1f64f_1f3fb_1f3fb);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.person_with_folded_hands_emoji_modifier_fitzpatrick_type_1_2_1f64f_1f3fb_1f3fb);
+                    sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image6:
-                    sticker.setImageResource(R.drawable.person_with_headscarf_emoji_modifier_fitzpatrick_type_1_2_1f9d5_1f3fb_1f3fb);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.person_with_headscarf_emoji_modifier_fitzpatrick_type_1_2_1f9d5_1f3fb_1f3fb);
+                    sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image7:
-                    sticker.setImageResource(R.drawable.raised_hand_with_fingers_splayed_emoji_modifier_fitzpatrick_type_1_2_1f590_1f3fb_1f3fb);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.raised_hand_with_fingers_splayed_emoji_modifier_fitzpatrick_type_1_2_1f590_1f3fb_1f3fb);
+                    sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image8:
-                    sticker.setImageResource(R.drawable.victory_hand_emoji_modifier_fitzpatrick_type_1_2_270c_1f3fb_1f3fb);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.victory_hand_emoji_modifier_fitzpatrick_type_1_2_270c_1f3fb_1f3fb);
+                    sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image9:
-                    sticker.setImageResource(R.drawable.white_heavy_check_mark_2705);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.white_heavy_check_mark_2705);
+                    sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image10:
-                    sticker.setImageResource(R.drawable.female_technologist_type_3_1f469_1f3fc_200d_1f4bb);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.female_technologist_type_3_1f469_1f3fc_200d_1f4bb);
+                    sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image11:
-                    sticker.setImageResource(R.drawable.flag_for_iran_1f1ee_1f1f7);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.flag_for_iran_1f1ee_1f1f7);
+                    sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
 
@@ -160,7 +174,23 @@ public class Addition extends AppCompatActivity implements View.OnClickListener,
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button_addition_next:
+                if (type.equals("sticker")) {
+                    Bitmap merge = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
+                    Canvas canvas = new Canvas(merge);
+                    canvas.drawBitmap(image, new Matrix(), null);
+                    if (bitmapSticker != null) {
+                        //canvas.drawBitmap(bitmapSticker, bitmapSticker.getHeight() + imageView.getX(), bitmapSticker.getWidth() + imageView.getY(), null);
+                        canvas.drawBitmap(bitmapSticker, sticker.getX() - imageView.getX(), sticker.getY() - imageView.getY(), null);
 
+                    }
+                    
+                    image =  merge;
+                    FirstPage.Companion.setImageFile(merge);
+                    Intent intent = new Intent(this, SecondPage.class);
+                    SecondPage.fa.finish();
+                    startActivity(intent);
+                    finish();
+                }
         }
     }
 
@@ -183,7 +213,9 @@ public class Addition extends AppCompatActivity implements View.OnClickListener,
             case MotionEvent.ACTION_MOVE:
                 RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)v.getLayoutParams();
                 layoutParams.leftMargin = X - xDelta;
+
                 layoutParams.topMargin = Y - yDelta;
+
                 layoutParams.rightMargin = -250;
                 layoutParams.bottomMargin = -250;
                 v.setLayoutParams(layoutParams);
