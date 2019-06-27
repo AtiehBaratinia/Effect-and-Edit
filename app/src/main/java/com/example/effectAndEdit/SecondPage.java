@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -48,8 +49,63 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
     /**
      * To do resizing on image.
      */
+    @SuppressLint("ClickableViewAccessibility")
     public void resize() {
+        final float[] percent = new float[1];
+        percent[0] = 25;
+        /*
+        AlertDialog.Builder resizeDialog = new AlertDialog.Builder(this);
+        resizeDialog.setTitle("Choose size");
+        String[] resizeDialogItems = {"200%", "175%", "150%", "125%", "110%", "90%", "75%", "50%", "25%"};
+        resizeDialog.setItems(resizeDialogItems, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        percent[0] = 200;
+                        break;
+                    case 1:
+                        percent[0] = 175;
+                        break;
+                    case 2:
+                        percent[0] = 150;
+                        break;
+                    case 3:
+                        percent[0] = 125;
+                        break;
+                    case 4:
+                        percent[0] = 110;
+                        break;
+                    case 5:
+                        percent[0] = 90;
+                        break;
+                    case 6:
+                        percent[0] = 75;
+                        break;
+                    case 7:
+                        percent[0] = 50;
+                        break;
+                    case 8:
+                        percent[0] = 25;
+                        break;
+                }
+            }
+        });
+        resizeDialog.show();
+*/
+
         System.out.println("Resize Clicked.");
+        int width = image.getWidth();
+        int height = image.getHeight();
+        float scaleWidth = percent[0] / 100;
+        float scaleHeight = percent[0] / 100;
+
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        Bitmap resizedBitmap = Bitmap.createBitmap(image, 0, 0, width, height, matrix, true);
+        imageView.setImageBitmap(resizedBitmap);
+
     }
 
     /**
