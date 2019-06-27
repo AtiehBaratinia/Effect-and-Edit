@@ -47,64 +47,64 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
     }
 
     /**
-     * To do resizing on image.
+     * To show resize options to user.
      */
-    @SuppressLint("ClickableViewAccessibility")
     public void resize() {
-        final float[] percent = new float[1];
-        int width = image.getWidth();
-        int height = image.getHeight();
+        final int width = image.getWidth();
+        final int height = image.getHeight();
 
         AlertDialog.Builder resizeDialog = new AlertDialog.Builder(this);
-        resizeDialog.setTitle("Choose size");
+        resizeDialog.setTitle("Choose Size");
         String[] resizeDialogItems = new String[8];
-        for (int i = 0; i < 8; i++) {
-            resizeDialogItems[i] = (i + 1) * 0.25 * width + " : " + (i + 1) * 0.25 * height;
-        }
+        for (int i = 1; i <= 8; i++) resizeDialogItems[i - 1] = i * 0.25 * width + " : " + i * 0.25 * height;
         resizeDialog.setItems(resizeDialogItems, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 7:
-                        percent[0] = 200;
+                        resizing(200);
                         break;
                     case 6:
-                        percent[0] = 175;
+                        resizing(175);
                         break;
                     case 5:
-                        percent[0] = 150;
+                        resizing(150);
                         break;
                     case 4:
-                        percent[0] = 125;
+                        resizing(125);
                         break;
                     case 3:
-                        percent[0] = 100;
+                        resizing(100);
                         break;
                     case 2:
-                        percent[0] = 75;
+                        resizing(75);
                         break;
                     case 1:
-                        percent[0] = 50;
+                        resizing(50);
                         break;
                     case 0:
-                        percent[0] = 25;
+                        resizing(25);
                         break;
                 }
             }
         });
         resizeDialog.show();
+    }
 
-
-        System.out.println("Resize Clicked.");
-        float scaleWidth = percent[0] / 100;
-        float scaleHeight = percent[0] / 100;
+    /**
+     * To do resizing on the image.
+     *
+     * @param percent percent we want to resize.
+     */
+    private void resizing(float percent) {
+        float scaleWidth = percent / 100;
+        float scaleHeight = percent / 100;
 
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleHeight);
 
-        Bitmap resizedBitmap = Bitmap.createBitmap(image, 0, 0, width, height, matrix, true);
-        imageView.setImageBitmap(resizedBitmap);
-
+        image = Bitmap.createBitmap(image, 0, 0, image.getWidth(), image.getHeight(), matrix, true);
+        imageView.setImageBitmap(image);
     }
 
     /**
@@ -295,18 +295,18 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
                     case 0:
                         //Here a sticker applies. From Addition class.
                         System.out.println("Sticker Clicked.");
-                        intent.putExtra("type","sticker");
+                        intent.putExtra("type", "sticker");
                         break;
                     case 1:
                         //Here a text applies. From Text class.
                         System.out.println("Text Clicked.");
-                        intent.putExtra("type","text");
+                        intent.putExtra("type", "text");
 
                         break;
                     case 2:
                         //Here a frame applies. From Frame class.
                         System.out.println("Frame Clicked.");
-                        intent.putExtra("type","frame");
+                        intent.putExtra("type", "frame");
                         break;
                 }
                 startActivity(intent);
@@ -325,7 +325,7 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.resize_button:
                 resize();
                 break;

@@ -1,17 +1,18 @@
 package com.example.effectAndEdit;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.*;
-import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.*;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 
-public class Addition extends AppCompatActivity implements View.OnClickListener{
+public class Addition extends AppCompatActivity implements View.OnClickListener {
     static Bitmap image;
     String type;
     ImageView imageView, sticker;
@@ -24,6 +25,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener{
     EditText editText;
     private int xDelta;
     private int yDelta;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,24 +36,29 @@ public class Addition extends AppCompatActivity implements View.OnClickListener{
         image = FirstPage.Companion.getImageFile();
         imageView = findViewById(R.id.image_addition);
         imageView.setImageBitmap(image);
-        //editText = findViewById(R.id.edittext);
+        //editText = findViewById(R.id.edit_text);
 
 
         btn = findViewById(R.id.button_addition_next);
         btn.setOnClickListener(this);
-        if (type.equals("text")){
-            setText();
-        }else if(type.equals("frame")){
-            setFrame();
-        }else if(type.equals("sticker")){
-            setSticker();
+        switch (type) {
+            case "text":
+                setText();
+                break;
+            case "frame":
+                setFrame();
+                break;
+            case "sticker":
+                setSticker();
+                break;
         }
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setSticker() {
-        AlertDialog.Builder alerDialog = new AlertDialog.Builder(this);
-        View view = getLayoutInflater().inflate(R.layout.dialog_sticker,null);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.dialog_sticker, null);
         ImageView[] imageViews = new ImageView[11];
         imageViews[0] = view.findViewById(R.id.image1);
         imageViews[1] = view.findViewById(R.id.image2);
@@ -68,13 +75,13 @@ public class Addition extends AppCompatActivity implements View.OnClickListener{
             imageViews[i].setOnClickListener(new StickerTouch());
         }
 
-        alerDialog.setView(view);
-        dialog = alerDialog.create();
+        alertDialog.setView(view);
+        dialog = alertDialog.create();
         dialog.show();
 
-        viewGroup = (ViewGroup)findViewById(R.id.top_layout);
+        viewGroup = findViewById(R.id.top_layout);
         sticker = new ImageView(this);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(240,240);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(240, 240);
 
         sticker.setLayoutParams(layoutParams);
         sticker.setOnTouchListener(new ChoiceTouchListener());
@@ -83,7 +90,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener{
 
     private void setFrame() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        View view = getLayoutInflater().inflate(R.layout.frame_layout,null);
+        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.frame_layout, null);
         ImageView[] imageViews = new ImageView[3];
         imageViews[0] = view.findViewById(R.id.image1_frame);
         imageViews[1] = view.findViewById(R.id.image2_frame);
@@ -96,7 +103,9 @@ public class Addition extends AppCompatActivity implements View.OnClickListener{
         dialog = alertDialog.create();
         dialog.show();
     }
+
     final int[] color = new int[1];
+
     private void setText() {
 
         AlertDialog.Builder colorDialog = new AlertDialog.Builder(this);
@@ -131,7 +140,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener{
 
         viewGroup = findViewById(R.id.small_layout);
         textView = new TextView(this);
-        editText = findViewById(R.id.edittext);
+        editText = findViewById(R.id.edit_text);
         editText.setVisibility(View.VISIBLE);
         okButton = findViewById(R.id.ok_button_text);
         okButton.setOnClickListener(this);
@@ -139,17 +148,17 @@ public class Addition extends AppCompatActivity implements View.OnClickListener{
         textView.setDrawingCacheEnabled(true);
 
 
-
     }
-    private class frameTouch implements View.OnClickListener{
+
+    private class frameTouch implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
             ImageView frame;
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.image1_frame:
                     frame = findViewById(R.id.image1_frame);
-                    bitmapFrame = BitmapFactory.decodeResource(getResources(),R.drawable.image_border);
+                    bitmapFrame = BitmapFactory.decodeResource(getResources(), R.drawable.image_border);
                     sticker.setImageBitmap(bitmapFrame);
                     dialog.dismiss();
 
@@ -162,7 +171,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener{
 
                     }
 
-                    image =  merge;
+                    image = merge;
                     imageView.setImageBitmap(merge);
 
                 case R.id.image2_frame:
@@ -177,64 +186,75 @@ public class Addition extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
-    private class StickerTouch implements View.OnClickListener{
+    private class StickerTouch implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
 
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.image1:
-                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.smiling_face_with_heart_shaped_eyes_1f60d);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(),
+                            R.drawable.smiling_face_with_heart_shaped_eyes_1f60d);
                     sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image2:
-                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.multiple_musical_notes_1f3b6);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(),
+                            R.drawable.multiple_musical_notes_1f3b6);
                     sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image3:
-                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.male_technologist_type_1_2_1f468_1f3fb_200d_1f4bb);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(),
+                            R.drawable.male_technologist_type_1_2_1f468_1f3fb_200d_1f4bb);
                     sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image4:
-                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.person_raising_both_hands_in_celebration_emoji_modifier_fitzpatrick_type_1_2_1f64c_1f3fb_1f3fb);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(),
+                            R.drawable.person_raising_both_hands_in_celebration_emoji_modifier_fitzpatrick_type_1_2_1f64c_1f3fb_1f3fb);
                     sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image5:
-                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.person_with_folded_hands_emoji_modifier_fitzpatrick_type_1_2_1f64f_1f3fb_1f3fb);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(),
+                            R.drawable.person_with_folded_hands_emoji_modifier_fitzpatrick_type_1_2_1f64f_1f3fb_1f3fb);
                     sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image6:
-                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.person_with_headscarf_emoji_modifier_fitzpatrick_type_1_2_1f9d5_1f3fb_1f3fb);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(),
+                            R.drawable.person_with_headscarf_emoji_modifier_fitzpatrick_type_1_2_1f9d5_1f3fb_1f3fb);
                     sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image7:
-                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.raised_hand_with_fingers_splayed_emoji_modifier_fitzpatrick_type_1_2_1f590_1f3fb_1f3fb);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(),
+                            R.drawable.raised_hand_with_fingers_splayed_emoji_modifier_fitzpatrick_type_1_2_1f590_1f3fb_1f3fb);
                     sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image8:
-                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.victory_hand_emoji_modifier_fitzpatrick_type_1_2_270c_1f3fb_1f3fb);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(),
+                            R.drawable.victory_hand_emoji_modifier_fitzpatrick_type_1_2_270c_1f3fb_1f3fb);
                     sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image9:
-                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.white_heavy_check_mark_2705);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(),
+                            R.drawable.white_heavy_check_mark_2705);
                     sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image10:
-                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.female_technologist_type_3_1f469_1f3fc_200d_1f4bb);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(),
+                            R.drawable.female_technologist_type_3_1f469_1f3fc_200d_1f4bb);
                     sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
                 case R.id.image11:
-                    bitmapSticker = BitmapFactory.decodeResource(getResources(), R.drawable.flag_for_iran_1f1ee_1f1f7);
+                    bitmapSticker = BitmapFactory.decodeResource(getResources(),
+                            R.drawable.flag_for_iran_1f1ee_1f1f7);
                     sticker.setImageBitmap(bitmapSticker);
                     dialog.dismiss();
                     break;
@@ -243,37 +263,42 @@ public class Addition extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.button_addition_next:
-                if (type.equals("sticker")) {
-                    Bitmap merge = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
-                    Canvas canvas = new Canvas(merge);
-                    canvas.drawBitmap(image, new Matrix(), null);
-                    if (bitmapSticker != null && sticker.getX() - imageView.getX() > 0 && sticker.getY() - imageView.getY() > 0) {
-                        canvas.drawBitmap(bitmapSticker, sticker.getX() - imageView.getX(), sticker.getY() - imageView.getY(), null);
+                switch (type) {
+                    case "sticker": {
+                        Bitmap merge = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
+                        Canvas canvas = new Canvas(merge);
+                        canvas.drawBitmap(image, new Matrix(), null);
+                        if (bitmapSticker != null && sticker.getX() - imageView.getX() > 0 && sticker.getY() - imageView.getY() > 0) {
+                            canvas.drawBitmap(bitmapSticker, sticker.getX() - imageView.getX(), sticker.getY() - imageView.getY(), null);
+                        }
+                        image = merge;
+                        FirstPage.Companion.setImageFile(merge);
+
+                        break;
                     }
-                    image =  merge;
-                    FirstPage.Companion.setImageFile(merge);
+                    case "frame":
 
-                }
-                else if(type.equals("frame")){
+                        break;
+                    case "text": {
+                        Bitmap merge = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
+                        Canvas canvas = new Canvas(merge);
+                        canvas.drawBitmap(image, new Matrix(), null);
 
-                }
-                else if(type.equals("text")){
-                    Bitmap merge = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
-                    Canvas canvas = new Canvas(merge);
-                    canvas.drawBitmap(image, new Matrix(), null);
+                        Bitmap text = Bitmap.createBitmap(textView.getDrawingCache());
 
-                    Bitmap text = Bitmap.createBitmap(textView.getDrawingCache());
+                        if (text != null && textView.getX() - imageView.getX() > 0 && textView.getY() - imageView.getY() > 0) {
 
-                    if (text != null && textView.getX() - imageView.getX() >0 && textView.getY() - imageView.getY() > 0) {
-
-                        canvas.drawBitmap(text, textView.getX() - imageView.getX() + 30 , textView.getY() - imageView.getY() + 30, null);
+                            canvas.drawBitmap(text, textView.getX() - imageView.getX() + 30, textView.getY() - imageView.getY() + 30, null);
+                        }
+                        image = merge;
+                        FirstPage.Companion.setImageFile(merge);
+                        break;
                     }
-                    image = merge;
-                    FirstPage.Companion.setImageFile(merge);
                 }
                 Intent intent = new Intent(this, SecondPage.class);
                 SecondPage.fa.finish();
@@ -285,31 +310,28 @@ public class Addition extends AppCompatActivity implements View.OnClickListener{
                 okButton.setVisibility(View.GONE);
                 editText.setVisibility(View.GONE);
 
-                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(400,400);
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(400, 400);
                 textView.setLayoutParams(layoutParams);
-                textView.setPadding(20,20,20,20);
+                textView.setPadding(20, 20, 20, 20);
                 textView.setTextSize(22f);
                 textView.setTextColor(color[0]);
                 viewGroup.addView(textView);
                 textView.setOnTouchListener(new ChoiceTouchListener());
-                
-
         }
     }
 
 
-
     private class ChoiceTouchListener implements View.OnTouchListener {
-
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             final int X = (int) event.getRawX();
             final int Y = (int) event.getRawY();
-            switch (event.getAction() & MotionEvent.ACTION_MASK){
+            switch (event.getAction() & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
-                    RelativeLayout.LayoutParams lparams =(RelativeLayout.LayoutParams)v.getLayoutParams();
-                    xDelta = X - lparams.leftMargin;
-                    yDelta = Y - lparams.topMargin;
+                    RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
+                    xDelta = X - lParams.leftMargin;
+                    yDelta = Y - lParams.topMargin;
                     break;
                 case MotionEvent.ACTION_UP:
                     break;
@@ -318,7 +340,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener{
                 case MotionEvent.ACTION_POINTER_UP:
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)v.getLayoutParams();
+                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
                     layoutParams.leftMargin = X - xDelta;
                     layoutParams.topMargin = Y - yDelta;
                     layoutParams.rightMargin = -250;

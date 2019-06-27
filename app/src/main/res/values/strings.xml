@@ -22,4 +22,6 @@
     <string name="save">Save!</string>
     <string name="type_here">اینجا بنویسید!</string>
     <string name="text_ok">متن خوبه!</string>
+    <string name="addition_next">خوبه!</string>
+    <string name="image_addition_dec">addition_image</string>
 </resources>

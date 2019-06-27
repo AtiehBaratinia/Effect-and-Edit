@@ -1,7 +1,6 @@
 package com.example.effectAndEdit;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -17,11 +16,11 @@ public class Frame {
     private final Rect mPictureRect;
 
     //degree of rotation to fit picture and frame.
-    private final float mRorate;
+    private final float mRotate;
 
-    public Frame(Bitmap frameBitmap,int left, int top, int right, int bottom, float rorate) {
+    public Frame(Bitmap frameBitmap, int left, int top, int right, int bottom, float rorate) {
         mPictureRect = new Rect(left, top, right, bottom);
-        mRorate = rorate;
+        mRotate = rorate;
         this.frameBitmap = frameBitmap;
     }
 
@@ -42,8 +41,8 @@ public class Frame {
 
     }
 
-    Matrix getMatrix(Bitmap pictureBitmap) {
-        float widthRatio = mPictureRect.width() /  (float) pictureBitmap.getWidth();
+    private Matrix getMatrix(Bitmap pictureBitmap) {
+        float widthRatio = mPictureRect.width() / (float) pictureBitmap.getWidth();
         float heightRatio = mPictureRect.height() / (float) pictureBitmap.getHeight();
 
         float ratio;
@@ -61,7 +60,7 @@ public class Frame {
         float top = mPictureRect.top - (height - mPictureRect.height()) / 2f;
 
         Matrix matrix = new Matrix();
-        matrix.postRotate(mRorate);
+        matrix.postRotate(mRotate);
         matrix.postScale(ratio, ratio);
         matrix.postTranslate(left, top);
 
