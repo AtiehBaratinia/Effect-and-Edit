@@ -20,4 +20,6 @@
     <!--For SavePage-->
     <string name="image_view_des_save">Final Image</string>
     <string name="save">Save!</string>
+    <string name="type_here">اینجا بنویسید!</string>
+    <string name="text_ok">متن خوبه!</string>
 </resources>

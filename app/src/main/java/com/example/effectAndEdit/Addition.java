@@ -1,29 +1,27 @@
 package com.example.effectAndEdit;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
+import android.content.res.ColorStateList;
+import android.graphics.*;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.*;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.*;
 
-public class Addition extends AppCompatActivity implements View.OnClickListener, View.OnDragListener{
+public class Addition extends AppCompatActivity implements View.OnClickListener{
     static Bitmap image;
     String type;
     ImageView imageView, sticker;
-    Bitmap bitmapSticker;
-    EditText editText;
+    Bitmap bitmapSticker, bitmapFrame;
+    TextView textView;
     ViewGroup viewGroup;
     Button btn;
-    float stickerX, stickerY;
+    Button okButton;
     AlertDialog dialog;
+    EditText editText;
     private int xDelta;
     private int yDelta;
     @Override
@@ -84,27 +82,102 @@ public class Addition extends AppCompatActivity implements View.OnClickListener,
     }
 
     private void setFrame() {
-    }
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.frame_layout,null);
+        ImageView[] imageViews = new ImageView[3];
+        imageViews[0] = view.findViewById(R.id.image1_frame);
+        imageViews[1] = view.findViewById(R.id.image2_frame);
+        imageViews[2] = view.findViewById(R.id.image3_frame);
+        for (int i = 0; i < 3; i++) {
+            imageViews[i].setOnClickListener(new frameTouch());
+        }
 
+        alertDialog.setView(view);
+        dialog = alertDialog.create();
+        dialog.show();
+    }
+    final int[] color = new int[1];
     private void setText() {
-        viewGroup = (ViewGroup)findViewById(R.id.small_layout);
-        editText = new EditText(this);
-        editText.setHint("type here");
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150,150);
-        editText.setLayoutParams(layoutParams);
-        editText.setPadding(20,20,20,20);
-        editText.setFocusable(true);
-        viewGroup.addView(editText);
-        editText.setEnabled(true);
-        viewGroup.setOnTouchListener(new ChoiceTouchListener());
-        viewGroup.setOnDragListener(this);
 
-        //editText.setOnTouchListener(new ChoiceTouchListener());
-        //editText.setOnDragListener(this);
-        //imageView.setOnTouchListener(new ChoiceTouchListener());
+        AlertDialog.Builder colorDialog = new AlertDialog.Builder(this);
+        colorDialog.setTitle("رنگ قلم را انتخاب کنید");
+        String[] colorDialogItems = {"آبی", "سبز", "قرمز", "زرد", "سفید", "سیاه"};
+        colorDialog.setItems(colorDialogItems, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        color[0] = Color.BLUE;
+                        break;
+                    case 1:
+                        color[0] = Color.GREEN;
+                        break;
+                    case 2:
+                        color[0] = Color.RED;
+                        break;
+                    case 3:
+                        color[0] = Color.YELLOW;
+                        break;
+                    case 4:
+                        color[0] = Color.WHITE;
+                        break;
+                    case 5:
+                        color[0] = Color.BLACK;
+                        break;
+                }
+            }
+        });
+        colorDialog.show();
+
+        viewGroup = findViewById(R.id.small_layout);
+        textView = new TextView(this);
+        editText = findViewById(R.id.edittext);
+        editText.setVisibility(View.VISIBLE);
+        okButton = findViewById(R.id.ok_button_text);
+        okButton.setOnClickListener(this);
+        okButton.setVisibility(View.VISIBLE);
+        textView.setDrawingCacheEnabled(true);
+
+
+
     }
-    private class StickerTouch implements View.OnClickListener{
+    private class frameTouch implements View.OnClickListener{
 
+        @Override
+        public void onClick(View v) {
+            ImageView frame;
+            switch (v.getId()){
+                case R.id.image1_frame:
+                    frame = findViewById(R.id.image1_frame);
+                    bitmapFrame = BitmapFactory.decodeResource(getResources(),R.drawable.image_border);
+                    sticker.setImageBitmap(bitmapFrame);
+                    dialog.dismiss();
+
+                    Bitmap merge = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
+                    Canvas canvas = new Canvas(merge);
+                    canvas.drawBitmap(image, new Matrix(), null);
+                    if (bitmapFrame != null) {
+                        //canvas.drawBitmap(bitmapSticker, bitmapSticker.getHeight() + imageView.getX(), bitmapSticker.getWidth() + imageView.getY(), null);
+                        canvas.drawBitmap(bitmapFrame, imageView.getX(), imageView.getY(), null);
+
+                    }
+
+                    image =  merge;
+                    imageView.setImageBitmap(merge);
+
+                case R.id.image2_frame:
+                    frame = findViewById(R.id.image2_frame);
+                    dialog.dismiss();
+                case R.id.image3_frame:
+                    frame = findViewById(R.id.image3_frame);
+                    dialog.dismiss();
+
+
+            }
+        }
+    }
+
+    private class StickerTouch implements View.OnClickListener{
 
         @Override
         public void onClick(View v) {
@@ -178,51 +251,50 @@ public class Addition extends AppCompatActivity implements View.OnClickListener,
                     Bitmap merge = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
                     Canvas canvas = new Canvas(merge);
                     canvas.drawBitmap(image, new Matrix(), null);
-                    if (bitmapSticker != null) {
-                        //canvas.drawBitmap(bitmapSticker, bitmapSticker.getHeight() + imageView.getX(), bitmapSticker.getWidth() + imageView.getY(), null);
+                    if (bitmapSticker != null && sticker.getX() - imageView.getX() > 0 && sticker.getY() - imageView.getY() > 0) {
                         canvas.drawBitmap(bitmapSticker, sticker.getX() - imageView.getX(), sticker.getY() - imageView.getY(), null);
-
                     }
-                    
                     image =  merge;
                     FirstPage.Companion.setImageFile(merge);
-                    Intent intent = new Intent(this, SecondPage.class);
-                    SecondPage.fa.finish();
-                    startActivity(intent);
-                    finish();
+
                 }
+                else if(type.equals("frame")){
+
+                }
+                else if(type.equals("text")){
+                    Bitmap merge = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
+                    Canvas canvas = new Canvas(merge);
+                    canvas.drawBitmap(image, new Matrix(), null);
+
+                    Bitmap text = Bitmap.createBitmap(textView.getDrawingCache());
+
+                    if (text != null && textView.getX() - imageView.getX() >0 && textView.getY() - imageView.getY() > 0) {
+
+                        canvas.drawBitmap(text, textView.getX() - imageView.getX() + 30 , textView.getY() - imageView.getY() + 30, null);
+                    }
+                    image = merge;
+                    FirstPage.Companion.setImageFile(merge);
+                }
+                Intent intent = new Intent(this, SecondPage.class);
+                SecondPage.fa.finish();
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.ok_button_text:
+                textView.setText(editText.getText().toString());
+                okButton.setVisibility(View.GONE);
+                editText.setVisibility(View.GONE);
+
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(400,400);
+                textView.setLayoutParams(layoutParams);
+                textView.setPadding(20,20,20,20);
+                textView.setTextSize(22f);
+                textView.setTextColor(color[0]);
+                viewGroup.addView(textView);
+                textView.setOnTouchListener(new ChoiceTouchListener());
+                
+
         }
-    }
-
-    @Override
-    public boolean onDrag(View v, DragEvent event) {
-        final int X = (int) event.getX();
-        final int Y = (int) event.getY();
-        switch (event.getAction() & MotionEvent.ACTION_MASK){
-            case MotionEvent.ACTION_DOWN:
-                RelativeLayout.LayoutParams lparams =(RelativeLayout.LayoutParams)v.getLayoutParams();
-                xDelta = X - lparams.leftMargin;
-                yDelta = Y - lparams.topMargin;
-                break;
-            case MotionEvent.ACTION_UP:
-                break;
-            case MotionEvent.ACTION_POINTER_DOWN:
-                break;
-            case MotionEvent.ACTION_POINTER_UP:
-                break;
-            case MotionEvent.ACTION_MOVE:
-                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)v.getLayoutParams();
-                layoutParams.leftMargin = X - xDelta;
-
-                layoutParams.topMargin = Y - yDelta;
-
-                layoutParams.rightMargin = -250;
-                layoutParams.bottomMargin = -250;
-                v.setLayoutParams(layoutParams);
-                break;
-        }
-        viewGroup.invalidate();
-        return true;
     }
 
 
