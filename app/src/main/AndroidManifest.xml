@@ -41,9 +41,6 @@
                 android:name="com.example.kamalolmolk.SecondPage"
                 android:parentActivityName="com.example.kamalolmolk.FirstPage"/>
         <activity
-                android:name="com.example.kamalolmolk.Crop"
-                android:parentActivityName="com.example.kamalolmolk.SecondPage"/>
-        <activity
                 android:name="com.example.kamalolmolk.SavePage"
                 android:parentActivityName="com.example.kamalolmolk.SecondPage"/>
         <activity android:name="com.example.kamalolmolk.Addition" android:parentActivityName=".SecondPage"/>

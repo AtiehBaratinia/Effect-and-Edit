@@ -96,7 +96,6 @@ class FirstPage : AppCompatActivity() {
         }
     }
 
-
     /** To take a photo from the user */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -113,7 +112,6 @@ class FirstPage : AppCompatActivity() {
                     bitmapToFile(bitmap) //To save the temp image
                     imageFile = bitmap
                 } catch (e: IOException) {
-                    e.printStackTrace()
                     Toast.makeText(this, "انجام نشد.", Toast.LENGTH_SHORT).show()
                 }
 
@@ -136,6 +134,7 @@ class FirstPage : AppCompatActivity() {
         // Create an image file name
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
+
         return File.createTempFile(
             "JPEG_${timeStamp}_", /* prefix */
             ".jpg", /* suffix */

@@ -18,6 +18,7 @@ import android.widget.ImageView;
 public class SecondPage extends AppCompatActivity implements View.OnClickListener {
     static Bitmap image;
     private ImageView imageView;
+    @SuppressLint("StaticFieldLeak")
     public static Activity fa;
 
     @Override
@@ -111,7 +112,7 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
      * To do cropping on image.
      */
     public void crop() {
-        Intent intent = new Intent("com.example.effectAndEdit.Crop");
+
     }
 
     /**

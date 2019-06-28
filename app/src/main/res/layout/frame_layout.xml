@@ -48,15 +48,4 @@
                 android:contentDescription="@string/image5_frame_des"/>
 
     </LinearLayout>
-    <!--<LinearLayout android:layout_width="wrap_content"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:layout_height="wrap_content">-->
-    <!--<ImageView-->
-    <!--android:layout_width="100dp"-->
-    <!--android:layout_height="100dp"-->
-    <!--android:id="@+id/image7_frame"-->
-    <!--android:background="@drawable/f7"-->
-    <!--/>-->
-
-    <!--</LinearLayout>-->
 </LinearLayout>
