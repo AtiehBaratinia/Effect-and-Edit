@@ -1,4 +1,4 @@
-package com.example.effectAndEdit
+package com.example.kamalolmolk
 
 
 import android.annotation.SuppressLint
@@ -40,8 +40,8 @@ class SavePage : AppCompatActivity() {
      */
     private fun save(image: Bitmap) {
         val saveDialog = AlertDialog.Builder(this)
-        saveDialog.setTitle("Select Kind of Saving")
-        val saveDialogItems = arrayOf("Normal Save", "Grid Save")
+        saveDialog.setTitle("نوع ذخیره را انتخاب کنید")
+        val saveDialogItems = arrayOf("ذخیره عادی", "ذخیره به صورت 9 تکه")
         saveDialog.setItems(saveDialogItems) { _, which ->
             when (which) {
                 0 -> normalSave(image)
@@ -74,16 +74,16 @@ class SavePage : AppCompatActivity() {
             FirstPage.imageFile = null
             SecondPage.image = null
 
-            Toast.makeText(this, "Final Image Saved! Directory: $currentPhotoPath.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "تصویر تهایی ذخیره شد! مکان دخیره: $currentPhotoPath.", Toast.LENGTH_LONG).show()
             val firstIntent = Intent(this, FirstPage::class.java)
             startActivity(firstIntent)
         } catch (e: IOException) {
-            Toast.makeText(this, "A problem occurred.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "مشکلی رخ داد.", Toast.LENGTH_SHORT).show()
         }
     }
 
     /**
-     * To save the image in a 9*9 format.
+     * To save the image in a 3*3 format.
      */
     private fun gridSave(bitmap: Bitmap) {
         val width = bitmap.width

@@ -1,4 +1,4 @@
-package com.example.effectAndEdit;
+package com.example.kamalolmolk;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -54,7 +54,7 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
         final int height = image.getHeight();
 
         AlertDialog.Builder resizeDialog = new AlertDialog.Builder(this);
-        resizeDialog.setTitle("Choose Size");
+        resizeDialog.setTitle("اندازه را انتخاب کنید");
         String[] resizeDialogItems = new String[8];
         for (int i = 1; i <= 8; i++) resizeDialogItems[i - 1] = i * 0.25 * width + " : " + i * 0.25 * height;
         resizeDialog.setItems(resizeDialogItems, new DialogInterface.OnClickListener() {
@@ -111,7 +111,6 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
      * To do cropping on image.
      */
     public void crop() {
-        System.out.println("Crop Clicked.");
         Intent intent = new Intent("com.example.effectAndEdit.Crop");
     }
 
@@ -122,8 +121,8 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
     public void blur() {
         final int[] thickness = new int[1];
         AlertDialog.Builder thicknessDialog = new AlertDialog.Builder(this);
-        thicknessDialog.setTitle("Choose a Thickness");
-        String[] thicknessDialogItems = {"Thickness 1", "Thickness 2", "Thickness 3", "Thickness 4", "Thickness 5"};
+        thicknessDialog.setTitle("ضلع ناحیه واضح را انتخاب کنید");
+        String[] thicknessDialogItems = {"اندازه 1", "اندازه 2", "اندازه 3", "اندازه 4", "اندازه 5"};
         thicknessDialog.setItems(thicknessDialogItems, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -260,8 +259,8 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
         // To choose color
         AlertDialog.Builder colorDialog = new AlertDialog.Builder(this);
         final AlertDialog.Builder thicknessDialog = new AlertDialog.Builder(this);
-        colorDialog.setTitle("Choose a Color");
-        String[] colorDialogItems = {"Blue", "Green", "Red", "Yellow", "White", "Black"};
+        colorDialog.setTitle("یک رنگ انتخاب کنید");
+        String[] colorDialogItems = {"آبی", "سبز", "قرمز", "زرد", "سفید", "مشکی"};
         colorDialog.setItems(colorDialogItems, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -290,8 +289,8 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
         });
 
         // To choose thickness
-        thicknessDialog.setTitle("Choose a Thickness");
-        String[] thicknessDialogItems = {"Thickness 1", "Thickness 2", "Thickness 3"};
+        thicknessDialog.setTitle("ضخامت قلم را انتخاب کنید");
+        String[] thicknessDialogItems = {"ضخامت 1", "ضخامت 2", "ضخامت 3"};
         thicknessDialog.setItems(thicknessDialogItems, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

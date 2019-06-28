@@ -1,4 +1,4 @@
-package com.example.effectAndEdit
+package com.example.kamalolmolk
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -52,8 +52,8 @@ class FirstPage : AppCompatActivity() {
     /** Actions for Give me a photo button */
     private fun showPictureDialog() {
         val pictureDialog = AlertDialog.Builder(this)
-        pictureDialog.setTitle("Select Action")
-        val pictureDialogItems = arrayOf("Select from Gallery", "Capture a Photo")
+        pictureDialog.setTitle("نحوه انتخاب عکس را مشخص کنید")
+        val pictureDialogItems = arrayOf("انتخاب از گالری", "گرفتن عکس با دوربین")
         pictureDialog.setItems(pictureDialogItems) { _, which ->
             when (which) {
                 0 -> selectImageInAlbum()
@@ -80,7 +80,7 @@ class FirstPage : AppCompatActivity() {
                     createImageFile()
                 } catch (ex: IOException) {
                     // Error occurred while creating the File
-                    Toast.makeText(this, "A problem occurred.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "مشکلی رخ داد.", Toast.LENGTH_SHORT).show()
                     null
                 }
                 // Continue only if the File was successfully created
@@ -114,7 +114,7 @@ class FirstPage : AppCompatActivity() {
                     imageFile = bitmap
                 } catch (e: IOException) {
                     e.printStackTrace()
-                    Toast.makeText(this, "Failed.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "انجام نشد.", Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -126,7 +126,7 @@ class FirstPage : AppCompatActivity() {
                 val bitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
                 selectedImage!!.setImageBitmap(bitmap)
                 imageFile = bitmap
-            } else Toast.makeText(this, "Failed.", Toast.LENGTH_SHORT).show()
+            } else Toast.makeText(this, "انجام نشد.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -164,7 +164,7 @@ class FirstPage : AppCompatActivity() {
             stream.flush()
             stream.close()
         } catch (e: IOException) {
-            Toast.makeText(this, "A problem occurred.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "مشکلی رخ داد.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -174,8 +174,8 @@ class FirstPage : AppCompatActivity() {
             startActivity(secondIntent)
         } else {
             val dialog = AlertDialog.Builder(this)
-            dialog.setTitle("No picture selected")
-            dialog.setMessage("You have not selected any picture yet!")
+            dialog.setTitle("عکسی انتخاب نشده")
+            dialog.setMessage("شما هنوز عکسی انتخاب نکرده اید!")
             dialog.show()
         }
     }

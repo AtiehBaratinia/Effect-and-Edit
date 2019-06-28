@@ -1,4 +1,4 @@
-package com.example.effectAndEdit
+package com.example.kamalolmolk
 
 import org.junit.Test
 

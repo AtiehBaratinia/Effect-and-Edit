@@ -1,10 +1,12 @@
-package com.example.effectAndEdit;
+package com.example.kamalolmolk;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -20,7 +22,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
     String type;
     Context context;
     ImageView imageView, sticker;
-    Bitmap  bitmapFrame;
+    Bitmap bitmapFrame;
     Bitmap bitmapSticker;
     TextView textView;
     ViewGroup viewGroup;
@@ -38,7 +40,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
 
         Intent intent = getIntent();
         type = intent.getStringExtra("type");
-        image = FirstPage.Companion.getImageFile();
+        image = SecondPage.image;
         imageView = findViewById(R.id.image_addition);
 
         //editText = findViewById(R.id.edit_text);
@@ -132,6 +134,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
 
     private class frameTouch implements View.OnClickListener {
         Drawable d;
+
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
@@ -140,38 +143,6 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
                     bitmapFrame = BitmapFactory.decodeResource(context.getResources(),
                             R.drawable.f1);
                     break;
-
-
-                    //sample 1
-                   /* bitmapFrame = BitmapFactory.decodeResource(context.getResources(), R.drawable.frame1);
-                    //sticker.setImageBitmap(bitmapFrame);
-                    dialog.dismiss();
-
-                    Bitmap merge = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
-                    Canvas canvas = new Canvas(merge);
-                    canvas.drawBitmap(image, new Matrix(), null);
-                    if (bitmapFrame != null) {
-                        //canvas.drawBitmap(bitmapSticker, bitmapSticker.getHeight() + imageView.getX(), bitmapSticker.getWidth() + imageView.getY(), null);
-                        canvas.drawBitmap(bitmapFrame, imageView.getX(), imageView.getY(), null);
-
-                    }
-                    //image = merge;
-                    imageView.setImageBitmap(merge);*/
-
-
-                    //sample 2
-                    //This is sample picture.
-                    //Please take picture form gallery or camera.
-//                    bitmapFrame = BitmapFactory.decodeResource(getResources(), R.drawable.f1);
-
-                    //This is sample frame.
-                    // the number of left, top, right, bottom is the area to show picture.
-                    // last argument is degree of rotation to fit picture and frame.
-//                    Frame frame1 = new Frame(bitmapFrame, 0 ,0,imageView.getRight(),imageView.getBottom(),0);
-//                    Bitmap mergedBitmap = frame1.mergeWith(context, image);
-
-                    //showing result bitmap
-//                    imageView.setImageBitmap(mergedBitmap);
 
                 case R.id.image2_frame:
                     bitmapFrame = BitmapFactory.decodeResource(context.getResources(),
@@ -189,11 +160,6 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
                     bitmapFrame = BitmapFactory.decodeResource(context.getResources(),
                             R.drawable.f5);
                     break;
-
-//                case R.id.image7_frame:
-//                    bitmapFrame = BitmapFactory.decodeResource(context.getResources(),
-//                            R.drawable.f7);
-//                    break;
             }
             d = new BitmapDrawable(getResources(), image);
             imageView.setBackground(d);
@@ -297,7 +263,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
                             canvas.drawBitmap(bitmapSticker, sticker.getX() - imageView.getX(), sticker.getY() - imageView.getY(), null);
                         }
                         image = merge;
-                        FirstPage.Companion.setImageFile(merge);
+                        SecondPage.image = merge;
 
                         break;
                     }
@@ -310,11 +276,11 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
                         Bitmap merge = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
                         Canvas canvas = new Canvas(merge);
                         canvas.drawBitmap(b1, new Matrix(), null);
-                        if (a1 != null ) {
-                            canvas.drawBitmap(a1, 0,0, null);
+                        if (a1 != null) {
+                            canvas.drawBitmap(a1, 0, 0, null);
                         }
                         image = merge;
-                        FirstPage.Companion.setImageFile(merge);
+                        SecondPage.image = merge;
                         break;
                     }
                     case "text": {
@@ -329,7 +295,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
                             canvas.drawBitmap(text, textView.getX() - imageView.getX(), textView.getY() - imageView.getY() , null);
                         }
                         image = merge;
-                        FirstPage.Companion.setImageFile(merge);
+                        SecondPage.image = merge;
                         break;
                     }
                 }
@@ -357,6 +323,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
     private class ChoiceTouchListener implements View.OnTouchListener {
         private int xDelta;
         private int yDelta;
+
         @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View v, MotionEvent event) {

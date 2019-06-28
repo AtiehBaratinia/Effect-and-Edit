@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.example.effectAndEdit">
+          package="com.example.kamalolmolk">
 
     <uses-feature
             android:name="android.hardware.camera"
@@ -19,8 +19,6 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Addition">
-        </activity>
 
         <provider
                 android:name="android.support.v4.content.FileProvider"
@@ -32,7 +30,7 @@
                     android:resource="@xml/file_paths"/>
         </provider>
 
-        <activity android:name=".FirstPage">
+        <activity android:name="com.example.kamalolmolk.FirstPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -40,14 +38,15 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".SecondPage"
-                android:parentActivityName=".FirstPage"/>
+                android:name="com.example.kamalolmolk.SecondPage"
+                android:parentActivityName="com.example.kamalolmolk.FirstPage"/>
         <activity
-                android:name=".Crop"
-                android:parentActivityName=".SecondPage"/>
+                android:name="com.example.kamalolmolk.Crop"
+                android:parentActivityName="com.example.kamalolmolk.SecondPage"/>
         <activity
-                android:name=".SavePage"
-                android:parentActivityName=".SecondPage"/>
+                android:name="com.example.kamalolmolk.SavePage"
+                android:parentActivityName="com.example.kamalolmolk.SecondPage"/>
+        <activity android:name="com.example.kamalolmolk.Addition" android:parentActivityName=".SecondPage"/>
     </application>
 
 </manifest>
