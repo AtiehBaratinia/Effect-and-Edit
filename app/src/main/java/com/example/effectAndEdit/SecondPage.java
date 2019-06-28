@@ -112,13 +112,194 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
      */
     public void crop() {
         System.out.println("Crop Clicked.");
+        Intent intent = new Intent("com.example.effectAndEdit.Crop");
     }
 
     /**
      * To do blurring on image.
      */
+    @SuppressLint("ClickableViewAccessibility")
     public void blur() {
+        final int[] thickness = new int[1];
+        AlertDialog.Builder thicknessDialog = new AlertDialog.Builder(this);
+        thicknessDialog.setTitle("Choose a Thickness");
+        String[] thicknessDialogItems = {"Thickness 1", "Thickness 2", "Thickness 3", "Thickness 4", "Thickness 5"};
+        thicknessDialog.setItems(thicknessDialogItems, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        thickness[0] = 100;
+                        break;
+                    case 1:
+                        thickness[0] = 200;
+                        break;
+                    case 2:
+                        thickness[0] = 300;
+                        break;
+                    case 3:
+                        thickness[0] = 400;
+                        break;
+                    case 4:
+                        thickness[0] = 500;
+                        break;
+                }
+            }
+        });
+        thicknessDialog.show();
+        final int[] x = new int[1];
+        final int[] y = new int[1];
+        imageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                x[0] = (int) event.getX();
+                y[0] = (int) event.getY();
+
+                image = bluring(image, x[0], y[0], thickness[0]);
+                imageView.setImageBitmap(image);
+                return false;
+            }
+        });
         System.out.println("Blur Clicked.");
+    }
+
+    public Bitmap bluring(Bitmap image, int x, int y, int radius) {
+        Bitmap out = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
+        for (int i = 0; i < image.getWidth(); ++i) {
+            for (int j = 0; j < image.getHeight(); ++j) {
+                // get one pixel color
+                int pixel = image.getPixel(i, j);
+                // retrieve color of all channels
+                int red = Color.red(pixel);
+                int green = Color.green(pixel);
+                int blue = Color.blue(pixel);
+
+                if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > radius) {
+                    int c = 0;
+                    int ham;
+                    red = 0;
+                    blue = 0;
+                    green = 0;
+                    int p;
+                    if(Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 9 * radius)
+                        p = 10;
+                    else {
+                        if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 8 * radius)
+                            p = 9;
+                        else {
+                            if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 7 * radius)
+                                p = 8;
+                            else {
+                                if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 6 * radius)
+                                    p = 7;
+                                else {
+                                    if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 5 * radius)
+                                        p = 6;
+                                    else {
+                                        if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 4 * radius)
+                                            p = 5;
+                                        else {
+                                            if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 3 * radius)
+                                                p = 4;
+                                            else {
+                                                if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 2 * radius)
+                                                    p = 3;
+                                                else {
+                                                    p = 2;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    for (int k = - p; k < p + 1; k++) {
+                        for (int l = - p; l < p + 1; l++) {
+                            if ((i + k) >= 0 && (i + k) < out.getWidth() && (j + l) >= 0 && (j + l) < out.getHeight()){
+                                ham = image.getPixel(i + k, j + l);
+                                red += Color.red(ham);
+                                blue += Color.blue(ham);
+                                green += Color.green(ham);
+                                c++;
+                            }
+                        }
+                    }
+//                    if (i > 0){
+//                        if (j > 0){
+//                            ham = image.getPixel(i - 1, j - 1);
+//                            red += Color.red(ham);
+//                            blue += Color.blue(ham);
+//                            green += Color.green(ham);
+//                            c++;
+//                        }
+//                        ham = image.getPixel(i - 1, j);
+//                        red += Color.red(ham);
+//                        blue += Color.blue(ham);
+//                        green += Color.green(ham);
+//                        c++;
+//                        if (j < out.getHeight() - 1){
+//                            ham = image.getPixel(i - 1, j + 1);
+//                            red += Color.red(ham);
+//                            blue += Color.blue(ham);
+//                            green += Color.green(ham);
+//                            c++;
+//                        }
+//                    }
+//                    if (j > 0){
+//                        ham = image.getPixel(i, j - 1);
+//                        red += Color.red(ham);
+//                        blue += Color.blue(ham);
+//                        green += Color.green(ham);
+//                        c++;
+//                    }
+//                    if (j < out.getHeight() - 1){
+//                        ham = image.getPixel(i, j + 1);
+//                        red += Color.red(ham);
+//                        blue += Color.blue(ham);
+//                        green += Color.green(ham);
+//                        c++;
+//                    }
+//                    if (i < out.getWidth() - 1){
+//                        if (j > 0){
+//                            ham = image.getPixel(i + 1, j - 1);
+//                            red += Color.red(ham);
+//                            blue += Color.blue(ham);
+//                            green += Color.green(ham);
+//                            c++;
+//                        }
+//                        ham = image.getPixel(i + 1, j);
+//                        red += Color.red(ham);
+//                        blue += Color.blue(ham);
+//                        green += Color.green(ham);
+//                        c++;
+//                        if (j < out.getHeight() - 1){
+//                            ham = image.getPixel(i + 1, j + 1);
+//                            red += Color.red(ham);
+//                            blue += Color.blue(ham);
+//                            green += Color.green(ham);
+//                            c++;
+//                        }
+//                    }
+                    red /= c;
+                    blue /= c;
+                    green/= c;
+                }
+
+                // set new pixel color to output bitmap
+                out.setPixel(i, j, Color.rgb(red, green, blue));
+            }
+        }
+//        if (Math.max(Math.max(Math.pow(Math.pow(x, 2) + Math.pow(y, 2), 0.5)
+//                , Math.pow(Math.pow(x, 2) + Math.pow(out.getHeight(), 2), 0.5))
+//                ,Math.max(Math.pow(Math.pow(out.getWidth(), 2) + Math.pow(y, 2), 0.5)
+//                , Math.pow(Math.pow(out.getWidth(), 2) + Math.pow(out.getHeight(), 2), 0.5))) < radius){
+//            return out;
+//        }
+//        else{
+//            return bluring(out,x,y, (int) (radius + 100));
+//        }
+        return out;
     }
 
     /**
