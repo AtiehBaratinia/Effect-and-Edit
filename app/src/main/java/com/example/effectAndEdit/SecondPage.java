@@ -439,7 +439,7 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
      */
     public void chooseEffect() {
         AlertDialog.Builder effectsDialog = new AlertDialog.Builder(this);
-        effectsDialog.setTitle("Choose an Effect");
+        effectsDialog.setTitle("یک افزونه(افکت) انتخاب کنید!");
         String[] effectsDialogItems = {"سیاه و سفید", "Effect 2", "Effect 3"};
         effectsDialog.setItems(effectsDialogItems, new DialogInterface.OnClickListener() {
             @Override
@@ -466,8 +466,8 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
      */
     public void chooseAddition() {
         final AlertDialog.Builder additionsDialog = new AlertDialog.Builder(this);
-        additionsDialog.setTitle("Choose an Addition");
-        String[] additionsDialogItems = {"Sticker", "Text", "Frame"};
+        additionsDialog.setTitle("چه چیزی میخواهید به تصویر اضافه کنید؟");
+        String[] additionsDialogItems = {"استیکر", "نوشته", "قاب"};
         additionsDialog.setItems(additionsDialogItems, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -475,18 +475,15 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
                 switch (which) {
                     case 0:
                         //Here a sticker applies. From Addition class.
-                        System.out.println("Sticker Clicked.");
                         intent.putExtra("type", "sticker");
                         break;
                     case 1:
                         //Here a text applies. From Text class.
-                        System.out.println("Text Clicked.");
                         intent.putExtra("type", "text");
 
                         break;
                     case 2:
                         //Here a frame applies. From Frame class.
-                        System.out.println("Frame Clicked.");
                         intent.putExtra("type", "frame");
                         break;
                 }
