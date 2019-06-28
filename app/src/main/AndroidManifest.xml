@@ -43,6 +43,9 @@
                 android:name=".SecondPage"
                 android:parentActivityName=".FirstPage"/>
         <activity
+                android:name=".Crop"
+                android:parentActivityName=".SecondPage"/>
+        <activity
                 android:name=".SavePage"
                 android:parentActivityName=".SecondPage"/>
     </application>

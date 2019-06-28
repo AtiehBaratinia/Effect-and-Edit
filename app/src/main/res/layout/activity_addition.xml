@@ -11,14 +11,14 @@
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/avatars"
+            android:background="@drawable/female_technologist_type_3_1f469_1f3fc_200d_1f4bb"
             android:id="@+id/image_addition"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:contentDescription="@string/image_addition_dec"/>
     <EditText
             android:layout_height="wrap_content"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:id="@+id/edit_text"
             android:layout_marginStart="100dp"
             android:hint="@string/type_here"
