@@ -264,7 +264,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
                         }
                         image = merge;
                         SecondPage.image = merge;
-
+                        FirstPage.Companion.setImageFile(image);
                         break;
                     }
                     case "frame": {
@@ -281,6 +281,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
                         }
                         image = merge;
                         SecondPage.image = merge;
+                        FirstPage.Companion.setImageFile(image);
                         break;
                     }
                     case "text": {
@@ -296,6 +297,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
                         }
                         image = merge;
                         SecondPage.image = merge;
+                        FirstPage.Companion.setImageFile(image);
                         break;
                     }
                 }
