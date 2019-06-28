@@ -97,7 +97,6 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
 
     private void setFrame() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        //@SuppressLint("InflateParams")
         @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.frame_layout, null);
         ImageView[] imageViews = new ImageView[7];
         imageViews[0] = view.findViewById(R.id.image1_frame);
@@ -114,39 +113,12 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
         dialog.show();
     }
 
-    final int[] color = new int[1];
+    int[] color;
 
     private void setText() {
 
-        AlertDialog.Builder colorDialog = new AlertDialog.Builder(this);
-        colorDialog.setTitle("رنگ قلم را انتخاب کنید");
-        String[] colorDialogItems = {"آبی", "سبز", "قرمز", "زرد", "سفید", "سیاه"};
-        colorDialog.setItems(colorDialogItems, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0:
-                        color[0] = Color.BLUE;
-                        break;
-                    case 1:
-                        color[0] = Color.GREEN;
-                        break;
-                    case 2:
-                        color[0] = Color.RED;
-                        break;
-                    case 3:
-                        color[0] = Color.YELLOW;
-                        break;
-                    case 4:
-                        color[0] = Color.WHITE;
-                        break;
-                    case 5:
-                        color[0] = Color.BLACK;
-                        break;
-                }
-            }
-        });
-        colorDialog.show();
+        Text t =new Text(context);
+        color = t.getColor();
 
         viewGroup = findViewById(R.id.small_layout);
         textView = new TextView(this);
@@ -354,7 +326,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
 
                         if (text != null && textView.getX() - imageView.getX() > 0 && textView.getY() - imageView.getY() > 0) {
 
-                            canvas.drawBitmap(text, textView.getX() - imageView.getX() + 30, textView.getY() - imageView.getY() + 30, null);
+                            canvas.drawBitmap(text, textView.getX() - imageView.getX(), textView.getY() - imageView.getY() , null);
                         }
                         image = merge;
                         FirstPage.Companion.setImageFile(merge);

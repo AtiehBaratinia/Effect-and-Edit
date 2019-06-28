@@ -35,6 +35,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/crop_button"/>
             <Button
                     android:text="@string/crop"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/crop_button"
                     app:layout_constraintBottom_toTopOf="@+id/blur_button" tools:layout_editor_absoluteX="20dp"/>

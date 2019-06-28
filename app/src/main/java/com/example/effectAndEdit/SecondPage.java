@@ -430,7 +430,7 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
 
                         break;
                     case 2:
-                        //Here a frame applies. From Frame class.
+                        //Here a frame applies.
                         intent.putExtra("type", "frame");
                         break;
                 }
