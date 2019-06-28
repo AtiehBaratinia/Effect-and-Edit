@@ -20,8 +20,26 @@
     <!--For SavePage-->
     <string name="image_view_des_save">Final Image</string>
     <string name="save">Save!</string>
+
+    <!--For Additions-->
     <string name="type_here">اینجا بنویسید!</string>
     <string name="text_ok">متن خوبه!</string>
     <string name="addition_next">خوبه!</string>
     <string name="image_addition_dec">addition_image</string>
+    <string name="image1_sticker_des">image1</string>
+    <string name="image2_sticker_des">image2</string>
+    <string name="image3_sticker_des">image3</string>
+    <string name="image4_sticker_des">image4</string>
+    <string name="image5_sticker_des">image5</string>
+    <string name="image6_sticker_des">image6</string>
+    <string name="image7_sticker_des">image7</string>
+    <string name="image8_sticker_des">image8</string>
+    <string name="image9_sticker_des">image9</string>
+    <string name="image10_sticker_des">image10</string>
+    <string name="image11_sticker_des">image11</string>
+    <string name="image1_frame_des">image1</string>
+    <string name="image2_frame_des">image2</string>
+    <string name="image3_frame_des">image3</string>
+    <string name="image4_frame_des">image4</string>
+    <string name="image5_frame_des">image5</string>
 </resources>

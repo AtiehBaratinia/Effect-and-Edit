@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:padding="20dp"
+              android:layout_width="match_parent"
+              android:padding="20dp"
               android:orientation="vertical"
-                android:layout_height="300dp">
+              android:layout_height="300dp">
     <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-    android:orientation="horizontal">
-    <ImageView
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:id="@+id/image1"
-    android:src="@drawable/smiling_face_with_heart_shaped_eyes_1f60d"
-    />
-    <ImageView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:src="@drawable/multiple_musical_notes_1f3b6"
-            android:id="@+id/image2"/>
-    <ImageView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:src="@drawable/male_technologist_type_1_2_1f468_1f3fb_200d_1f4bb"
-            android:id="@+id/image3"/>
-    <ImageView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:src="@drawable/person_raising_both_hands_in_celebration_emoji_modifier_fitzpatrick_type_1_2_1f64c_1f3fb_1f3fb"
-            android:id="@+id/image4"/>
-    <ImageView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:src="@drawable/person_with_folded_hands_emoji_modifier_fitzpatrick_type_1_2_1f64f_1f3fb_1f3fb"
-            android:id="@+id/image5"/>
+            android:orientation="horizontal">
+        <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/image1"
+                android:src="@drawable/smiling_face_with_heart_shaped_eyes_1f60d"
+                android:contentDescription="@string/image1_sticker_des"/>
+        <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/multiple_musical_notes_1f3b6"
+                android:id="@+id/image2" android:contentDescription="@string/image2_sticker_des"/>
+        <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/male_technologist_type_1_2_1f468_1f3fb_200d_1f4bb"
+                android:id="@+id/image3" android:contentDescription="@string/image3_sticker_des"/>
+        <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/person_raising_both_hands_in_celebration_emoji_modifier_fitzpatrick_type_1_2_1f64c_1f3fb_1f3fb"
+                android:id="@+id/image4" android:contentDescription="@string/image4_sticker_des"/>
+        <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/person_with_folded_hands_emoji_modifier_fitzpatrick_type_1_2_1f64f_1f3fb_1f3fb"
+                android:id="@+id/image5" android:contentDescription="@string/image5_sticker_des"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
@@ -43,36 +43,36 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:src="@drawable/person_with_headscarf_emoji_modifier_fitzpatrick_type_1_2_1f9d5_1f3fb_1f3fb"
-                android:id="@+id/image6"/>
+                android:id="@+id/image6" android:contentDescription="@string/image6_sticker_des"/>
         <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:src="@drawable/raised_hand_with_fingers_splayed_emoji_modifier_fitzpatrick_type_1_2_1f590_1f3fb_1f3fb"
-                android:id="@+id/image7"/>
+                android:id="@+id/image7" android:contentDescription="@string/image7_sticker_des"/>
         <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:src="@drawable/victory_hand_emoji_modifier_fitzpatrick_type_1_2_270c_1f3fb_1f3fb"
-                android:id="@+id/image8"/>
+                android:id="@+id/image8" android:contentDescription="@string/image8_sticker_des"/>
         <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:src="@drawable/white_heavy_check_mark_2705"
-                android:id="@+id/image9"/>
+                android:id="@+id/image9" android:contentDescription="@string/image9_sticker_des"/>
         <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:src="@drawable/female_technologist_type_3_1f469_1f3fc_200d_1f4bb"
-                android:id="@+id/image10"/>
+                android:id="@+id/image10" android:contentDescription="@string/image10_sticker_des"/>
     </LinearLayout>
     <LinearLayout
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal">
         <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:src="@drawable/flag_for_iran_1f1ee_1f1f7"
-                android:id="@+id/image11"/>
+                android:id="@+id/image11" android:contentDescription="@string/image11_sticker_des"/>
     </LinearLayout>
 </LinearLayout>

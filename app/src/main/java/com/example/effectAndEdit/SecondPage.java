@@ -116,7 +116,7 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
     }
 
     /**
-     * To do blurring on image.
+     * To choose thickness of blurring.
      */
     @SuppressLint("ClickableViewAccessibility")
     public void blur() {
@@ -155,15 +155,23 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
                 x[0] = (int) event.getX();
                 y[0] = (int) event.getY();
 
-                image = bluring(image, x[0], y[0], thickness[0]);
+                image = blurring(image, x[0], y[0], thickness[0]);
                 imageView.setImageBitmap(image);
                 return false;
             }
         });
-        System.out.println("Blur Clicked.");
     }
 
-    public Bitmap bluring(Bitmap image, int x, int y, int radius) {
+    /**
+     * To do blurring on image.
+     *
+     * @param image  the image we want to blur.
+     * @param x      x coordinate of where has been touched.
+     * @param y      y coordinate of where has been touched.
+     * @param radius radius of non-blur area.
+     * @return blurred image.
+     */
+    public Bitmap blurring(Bitmap image, int x, int y, int radius) {
         Bitmap out = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
         for (int i = 0; i < image.getWidth(); ++i) {
             for (int j = 0; j < image.getHeight(); ++j) {
@@ -174,35 +182,36 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
                 int green = Color.green(pixel);
                 int blue = Color.blue(pixel);
 
-                if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > radius) {
+                double expression = Math.pow(Math.pow(i - x, 2) + Math.pow(j - y, 2), 0.5);
+                if (expression > radius) {
                     int c = 0;
                     int ham;
                     red = 0;
                     blue = 0;
                     green = 0;
                     int p;
-                    if(Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 9 * radius)
+                    if (expression > 9 * radius)
                         p = 10;
                     else {
-                        if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 8 * radius)
+                        if (expression > 8 * radius)
                             p = 9;
                         else {
-                            if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 7 * radius)
+                            if (expression > 7 * radius)
                                 p = 8;
                             else {
-                                if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 6 * radius)
+                                if (expression > 6 * radius)
                                     p = 7;
                                 else {
-                                    if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 5 * radius)
+                                    if (expression > 5 * radius)
                                         p = 6;
                                     else {
-                                        if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 4 * radius)
+                                        if (expression > 4 * radius)
                                             p = 5;
                                         else {
-                                            if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 3 * radius)
+                                            if (expression > 3 * radius)
                                                 p = 4;
                                             else {
-                                                if (Math.pow(Math.pow(i - x , 2) + Math.pow(j - y, 2), 0.5) > 2 * radius)
+                                                if (expression > 2 * radius)
                                                     p = 3;
                                                 else {
                                                     p = 2;
@@ -214,9 +223,10 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
                             }
                         }
                     }
-                    for (int k = - p; k < p + 1; k++) {
-                        for (int l = - p; l < p + 1; l++) {
-                            if ((i + k) >= 0 && (i + k) < out.getWidth() && (j + l) >= 0 && (j + l) < out.getHeight()){
+
+                    for (int k = -p; k < p + 1; k++) {
+                        for (int l = -p; l < p + 1; l++) {
+                            if ((i + k) >= 0 && (i + k) < out.getWidth() && (j + l) >= 0 && (j + l) < out.getHeight()) {
                                 ham = image.getPixel(i + k, j + l);
                                 red += Color.red(ham);
                                 blue += Color.blue(ham);
@@ -225,80 +235,17 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
                             }
                         }
                     }
-//                    if (i > 0){
-//                        if (j > 0){
-//                            ham = image.getPixel(i - 1, j - 1);
-//                            red += Color.red(ham);
-//                            blue += Color.blue(ham);
-//                            green += Color.green(ham);
-//                            c++;
-//                        }
-//                        ham = image.getPixel(i - 1, j);
-//                        red += Color.red(ham);
-//                        blue += Color.blue(ham);
-//                        green += Color.green(ham);
-//                        c++;
-//                        if (j < out.getHeight() - 1){
-//                            ham = image.getPixel(i - 1, j + 1);
-//                            red += Color.red(ham);
-//                            blue += Color.blue(ham);
-//                            green += Color.green(ham);
-//                            c++;
-//                        }
-//                    }
-//                    if (j > 0){
-//                        ham = image.getPixel(i, j - 1);
-//                        red += Color.red(ham);
-//                        blue += Color.blue(ham);
-//                        green += Color.green(ham);
-//                        c++;
-//                    }
-//                    if (j < out.getHeight() - 1){
-//                        ham = image.getPixel(i, j + 1);
-//                        red += Color.red(ham);
-//                        blue += Color.blue(ham);
-//                        green += Color.green(ham);
-//                        c++;
-//                    }
-//                    if (i < out.getWidth() - 1){
-//                        if (j > 0){
-//                            ham = image.getPixel(i + 1, j - 1);
-//                            red += Color.red(ham);
-//                            blue += Color.blue(ham);
-//                            green += Color.green(ham);
-//                            c++;
-//                        }
-//                        ham = image.getPixel(i + 1, j);
-//                        red += Color.red(ham);
-//                        blue += Color.blue(ham);
-//                        green += Color.green(ham);
-//                        c++;
-//                        if (j < out.getHeight() - 1){
-//                            ham = image.getPixel(i + 1, j + 1);
-//                            red += Color.red(ham);
-//                            blue += Color.blue(ham);
-//                            green += Color.green(ham);
-//                            c++;
-//                        }
-//                    }
+
                     red /= c;
                     blue /= c;
-                    green/= c;
+                    green /= c;
                 }
 
                 // set new pixel color to output bitmap
                 out.setPixel(i, j, Color.rgb(red, green, blue));
             }
         }
-//        if (Math.max(Math.max(Math.pow(Math.pow(x, 2) + Math.pow(y, 2), 0.5)
-//                , Math.pow(Math.pow(x, 2) + Math.pow(out.getHeight(), 2), 0.5))
-//                ,Math.max(Math.pow(Math.pow(out.getWidth(), 2) + Math.pow(y, 2), 0.5)
-//                , Math.pow(Math.pow(out.getWidth(), 2) + Math.pow(out.getHeight(), 2), 0.5))) < radius){
-//            return out;
-//        }
-//        else{
-//            return bluring(out,x,y, (int) (radius + 100));
-//        }
+
         return out;
     }
 
@@ -439,7 +386,7 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
      */
     public void chooseEffect() {
         AlertDialog.Builder effectsDialog = new AlertDialog.Builder(this);
-        effectsDialog.setTitle("یک افزونه(افکت) انتخاب کنید!");
+        effectsDialog.setTitle("یک افکت انتخاب کنید!");
         String[] effectsDialogItems = {"سیاه و سفید", "Effect 2", "Effect 3"};
         effectsDialog.setItems(effectsDialogItems, new DialogInterface.OnClickListener() {
             @Override

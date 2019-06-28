@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Rect;
+import org.jetbrains.annotations.NotNull;
 
 public class Frame {
 
@@ -41,7 +42,7 @@ public class Frame {
 
     }
 
-    private Matrix getMatrix(Bitmap pictureBitmap) {
+    private Matrix getMatrix(@NotNull Bitmap pictureBitmap) {
         float widthRatio = mPictureRect.width() / (float) pictureBitmap.getWidth();
         float heightRatio = mPictureRect.height() / (float) pictureBitmap.getHeight();
 

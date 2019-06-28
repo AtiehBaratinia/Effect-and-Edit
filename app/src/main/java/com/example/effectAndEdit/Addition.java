@@ -8,7 +8,6 @@ import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -99,7 +98,7 @@ public class Addition extends AppCompatActivity implements View.OnClickListener 
     private void setFrame() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         //@SuppressLint("InflateParams")
-        View view = getLayoutInflater().inflate(R.layout.frame_layout, null);
+        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.frame_layout, null);
         ImageView[] imageViews = new ImageView[7];
         imageViews[0] = view.findViewById(R.id.image1_frame);
         imageViews[1] = view.findViewById(R.id.image2_frame);

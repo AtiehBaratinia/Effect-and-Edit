@@ -7,58 +7,56 @@
         android:layout_height="match_parent">
     <LinearLayout android:layout_width="wrap_content"
                   android:orientation="horizontal"
-        android:layout_height="wrap_content">
-            <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/image1_frame"
-            android:src="@drawable/f1t"
-            />
+                  android:layout_height="wrap_content">
         <ImageView
-            android:layout_marginLeft="20dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/image2_frame"
-            android:src="@drawable/f8t"
-
-            />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/image1_frame"
+                android:src="@drawable/f1t"
+                android:contentDescription="@string/image1_frame_des"/>
         <ImageView
-        android:layout_height="100dp"
-        android:layout_width="100dp"
-        android:layout_marginLeft="20dp"
-        android:src="@drawable/f3t"
-        android:id="@+id/image3_frame"
-        />
+                android:layout_marginStart="20dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/image2_frame"
+                android:src="@drawable/f8t"
+                android:contentDescription="@string/image2_frame_des"/>
+        <ImageView
+                android:layout_height="100dp"
+                android:layout_width="100dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/f3t"
+                android:id="@+id/image3_frame"
+                android:contentDescription="@string/image3_frame_des"/>
     </LinearLayout>
     <LinearLayout android:layout_width="wrap_content"
                   android:orientation="horizontal"
-        android:layout_height="wrap_content">
-            <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/image4_frame"
-            android:background="@drawable/f4t"
-            />
+                  android:layout_height="wrap_content">
         <ImageView
-            android:layout_marginLeft="20dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/image5_frame"
-            android:background="@drawable/f5t"
-            android:scaleType="fitXY"
-
-            />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/image4_frame"
+                android:background="@drawable/f4t"
+                android:contentDescription="@string/image4_frame_des"/>
+        <ImageView
+                android:layout_marginStart="20dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/image5_frame"
+                android:background="@drawable/f5t"
+                android:scaleType="fitXY"
+                android:contentDescription="@string/image5_frame_des"/>
 
     </LinearLayout>
     <!--<LinearLayout android:layout_width="wrap_content"-->
-                  <!--android:orientation="horizontal"-->
-        <!--android:layout_height="wrap_content">-->
-            <!--<ImageView-->
-            <!--android:layout_width="100dp"-->
-            <!--android:layout_height="100dp"-->
-            <!--android:id="@+id/image7_frame"-->
-            <!--android:background="@drawable/f7"-->
-            <!--/>-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_height="wrap_content">-->
+    <!--<ImageView-->
+    <!--android:layout_width="100dp"-->
+    <!--android:layout_height="100dp"-->
+    <!--android:id="@+id/image7_frame"-->
+    <!--android:background="@drawable/f7"-->
+    <!--/>-->
 
     <!--</LinearLayout>-->
 </LinearLayout>
