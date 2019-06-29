@@ -9,7 +9,7 @@
     <!--For SecondPage-->
     <string name="image_view_des_sec">The Image</string>
     <string name="resize">تغییر اندازه</string>
-    <string name="crop">برش</string>
+    <string name="rotate">چرخش</string>
     <string name="blur">تار کردن</string>
     <string name="paint">نقاشی کردن</string>
     <string name="effect">انتخاب افکت</string>

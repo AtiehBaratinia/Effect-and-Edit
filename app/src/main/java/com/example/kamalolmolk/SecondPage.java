@@ -30,7 +30,7 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
 
         imageView = findViewById(R.id.image_view_sec);
         Button resizeButton = findViewById(R.id.resize_button);
-        Button cropButton = findViewById(R.id.crop_button);
+        Button rotateButton = findViewById(R.id.rotate_button);
         Button blurButton = findViewById(R.id.blur_button);
         Button paintButton = findViewById(R.id.paint_button);
         Button effectButton = findViewById(R.id.effect_button);
@@ -39,7 +39,7 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
         imageView.setImageBitmap(image);
 
         resizeButton.setOnClickListener(this);
-        cropButton.setOnClickListener(this);
+        rotateButton.setOnClickListener(this);
         blurButton.setOnClickListener(this);
         paintButton.setOnClickListener(this);
         effectButton.setOnClickListener(this);
@@ -110,11 +110,72 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
 
     /**
      * To do cropping on image.
-     */
-    public void crop() {
+//     */
+//    public void crop() {
+//
+//    }
 
+    public void rotate(){
+        AlertDialog.Builder jahat = new AlertDialog.Builder(this);
+        jahat.setTitle("چرخش را انتخاب کنید");
+        jahat.setItems(new String[]{"راست", "معکوس","چپ", "مقلوب"}, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                rotating(which);
+            }
+        });
+        jahat.show();
     }
 
+    public void rotating(int o){
+        int w = 0, h = 0;
+        switch (o){
+            case 0:
+            case 2:
+                w = image.getHeight();
+                h = image.getWidth();
+                break;
+            case 1:
+            case 3:
+                h = image.getHeight();
+                w = image.getWidth();
+                break;
+        }
+        Bitmap out = Bitmap.createBitmap(w, h, image.getConfig());
+        for (int i = 0; i < image.getWidth(); ++i) {
+            for (int j = 0; j < image.getHeight(); ++j) {
+                // get one pixel color
+                int pixel = image.getPixel(i, j);
+                // retrieve color of all channels
+                int red = Color.red(pixel);
+                int green = Color.green(pixel);
+                int blue = Color.blue(pixel);
+                int k = 0, l = 0;
+                switch (o){
+                    case 0:
+                        l = i;
+                        k = h - 1 - j;
+                        break;
+                    case 1:
+                        l = h - 1 - j;
+                        k = w - 1 - i;
+                        break;
+                    case 2:
+                        k = j;
+                        l = w - 1 -i;
+                        break;
+                    case 3:
+                        k = w - 1 - i;
+                        l = j;
+                        break;
+                }
+                // set new pixel color to output bitmap
+                out.setPixel(k, l, Color.rgb(red, green, blue));
+            }
+        }
+        image = out;
+        imageView.setImageBitmap(image);
+    }
     /**
      * To choose thickness of blurring.
      */
@@ -384,10 +445,11 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
     /**
      * To choose and apply effects.
      */
+
     public void chooseEffect() {
         AlertDialog.Builder effectsDialog = new AlertDialog.Builder(this);
-        effectsDialog.setTitle("یک افکت انتخاب کنید!");
-        String[] effectsDialogItems = {"سیاه و سفید", "Effect 2", "Effect 3"};
+        effectsDialog.setTitle("یک افزونه(افکت) انتخاب کنید!");
+        String[] effectsDialogItems = {"سیاه و سفید", "طراحی", "گرم و قدیمی"};
         effectsDialog.setItems(effectsDialogItems, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -397,10 +459,12 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
                         imageView.setImageBitmap(image);
                         break;
                     case 1:
-                        Effects.effect2(image);
+                        image = Effects.doSketchEffect(image);
+                        imageView.setImageBitmap(image);
                         break;
                     case 2:
-                        Effects.effect3(image);
+                        image = Effects.doSepiaEffect(image);
+                        imageView.setImageBitmap(image);
                         break;
                 }
             }
@@ -454,8 +518,8 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
             case R.id.resize_button:
                 resize();
                 break;
-            case R.id.crop_button:
-                crop();
+            case R.id.rotate_button:
+                rotate();
                 break;
             case R.id.blur_button:
                 blur();
