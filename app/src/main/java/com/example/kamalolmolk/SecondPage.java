@@ -110,26 +110,26 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
 
     /**
      * To do cropping on image.
-//     */
+     * //
+     */
 //    public void crop() {
 //
 //    }
-
-    public void rotate(){
-        AlertDialog.Builder jahat = new AlertDialog.Builder(this);
-        jahat.setTitle("چرخش را انتخاب کنید");
-        jahat.setItems(new String[]{"راست", "معکوس","چپ", "مقلوب"}, new DialogInterface.OnClickListener() {
+    public void rotate() {
+        AlertDialog.Builder rotateDialog = new AlertDialog.Builder(this);
+        rotateDialog.setTitle("چرخش را انتخاب کنید");
+        rotateDialog.setItems(new String[]{"راست", "معکوس", "چپ", "مقلوب"}, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 rotating(which);
             }
         });
-        jahat.show();
+        rotateDialog.show();
     }
 
-    public void rotating(int o){
+    public void rotating(int o) {
         int w = 0, h = 0;
-        switch (o){
+        switch (o) {
             case 0:
             case 2:
                 w = image.getHeight();
@@ -151,7 +151,7 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
                 int green = Color.green(pixel);
                 int blue = Color.blue(pixel);
                 int k = 0, l = 0;
-                switch (o){
+                switch (o) {
                     case 0:
                         l = i;
                         k = h - 1 - j;
@@ -162,7 +162,7 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
                         break;
                     case 2:
                         k = j;
-                        l = w - 1 -i;
+                        l = w - 1 - i;
                         break;
                     case 3:
                         k = w - 1 - i;
@@ -176,6 +176,7 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
         image = out;
         imageView.setImageBitmap(image);
     }
+
     /**
      * To choose thickness of blurring.
      */
@@ -448,7 +449,7 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
 
     public void chooseEffect() {
         AlertDialog.Builder effectsDialog = new AlertDialog.Builder(this);
-        effectsDialog.setTitle("یک افزونه(افکت) انتخاب کنید!");
+        effectsDialog.setTitle("یک افکت انتخاب کنید");
         String[] effectsDialogItems = {"سیاه و سفید", "طراحی", "گرم و قدیمی"};
         effectsDialog.setItems(effectsDialogItems, new DialogInterface.OnClickListener() {
             @Override
